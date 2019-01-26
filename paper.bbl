@@ -1,0 +1,38 @@
+\begin{thebibliography}{1}
+
+\bibitem{kiess-manet-impl-2007}
+W.~Kiess and M.~Mauve.
+\newblock A survey on real-world implementations of mobile ad-hoc networks.
+\newblock {\em Ad Hoc Networks}, 5(3):324 -- 339, 2007.
+
+\bibitem{loo-manet-2011}
+J.~Loo, J.~L. Mauri, and J.~H. Ortiz.
+\newblock {\em Mobile Ad Hoc Networks: Current Status and Future Trends}.
+\newblock CRC Press, Inc., Boca Raton, FL, USA, 1st edition, 2011.
+
+\bibitem{marti-misbehavior-manet-2000}
+S.~Marti, T.~J. Giuli, K.~Lai, and M.~Baker.
+\newblock Mitigating routing misbehavior in mobile ad hoc networks.
+\newblock In {\em Proceedings of the 6th Annual International Conference on
+  Mobile Computing and Networking}, MobiCom '00, pages 255--265, New York, NY,
+  USA, 2000. ACM.
+
+\bibitem{mauve-pos-routing-manet-2001}
+M.~Mauve, J.~Widmer, and H.~Hartenstein.
+\newblock A survey on position-based routing in mobile ad hoc networks.
+\newblock {\em IEEE Network}, 15(6):30--39, Nov 2001.
+
+\bibitem{perkins-ad-hoc-2001}
+C.~E. Perkins.
+\newblock In {\em Ad Hoc Networking}, chapter Ad Hoc Networking: An
+  Introduction, pages 1--28. Addison-Wesley Longman Publishing Co., Inc.,
+  Boston, MA, USA, 2001.
+
+\bibitem{zhang-topology-manet-2015}
+X.~M. Zhang, Y.~Zhang, F.~Yan, and A.~V. Vasilakos.
+\newblock Interference-based topology control algorithm for delay-constrained
+  mobile ad hoc networks.
+\newblock {\em IEEE Transactions on Mobile Computing}, 14(4):742--754, April
+  2015.
+
+\end{thebibliography}
