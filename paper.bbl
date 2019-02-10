@@ -1,5 +1,17 @@
 \begin{thebibliography}{1}
 
+\bibitem{clausen-olsr-2003}
+T.~Clausen and P.~Jacquet.
+\newblock Optimized link state routing protocol (olsr).
+\newblock {\em RFC 3626}, October 2003.
+
+\bibitem{gardner-stephen-serval-2011}
+P.~Gardner-Stephen and S.~Palaniswamy.
+\newblock Serval mesh software-wifi multi model management.
+\newblock In {\em Proceedings of the 1st International Conference on Wireless
+  Technologies for Humanitarian Relief}, ACWR '11, pages 71--77, New York, NY,
+  USA, 2011. ACM.
+
 \bibitem{kiess-manet-impl-2007}
 W.~Kiess and M.~Mauve.
 \newblock A survey on real-world implementations of mobile ad-hoc networks.
@@ -21,6 +33,11 @@ S.~Marti, T.~J. Giuli, K.~Lai, and M.~Baker.
 M.~Mauve, J.~Widmer, and H.~Hartenstein.
 \newblock A survey on position-based routing in mobile ad hoc networks.
 \newblock {\em IEEE Network}, 15(6):30--39, Nov 2001.
+
+\bibitem{perkins-aodv-2003}
+C.~Perkins, E.~Belding-Royer, and S.~Das.
+\newblock Ad hoc on-demand distance vector (aodv) routing.
+\newblock {\em RFC 3561}, July 2003.
 
 \bibitem{perkins-ad-hoc-2001}
 C.~E. Perkins.
