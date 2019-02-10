@@ -3,8 +3,9 @@
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
+\usepackage{array,multirow,graphicx}
+\usepackage{float}
 \usepackage{algorithmic}
-\usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -311,12 +312,113 @@ weather alerts broadcast from the service. The mobile application is
 distributed with the corresponding public key so that digital
 signatures from the service can be verified. If a message fails such a
 verification, it is discarded and not forwarded any further.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{figs/android_ios}}
+\caption{Interoperability matrix between Android and iOS devices over BTLE}
+\label{fig:android_ios}
+\end{figure}
+
+
+\begin{table}[H]
+\caption{Android protocols and range results}
+\centering
+\begin{tabular}{|c|l|r|r|r|c|l|}
+\hline
+& \multicolumn{1}{c|}{Protocol} & \multicolumn{1}{c|}{Throughput} & \multicolumn{1}{c|}{Battery} & \multicolumn{1}{c|}{Range} & \multicolumn{1}{c|}{iOS} & \multicolumn{1}{c|}{Issues}\\
+&                               & \multicolumn{1}{c|}{Avg. kbps}  & \multicolumn{1}{c|}{per hour} & \multicolumn{1}{c|}{LoS ft} &                  &                            \\
+\hline
+\parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{WiFi}}} & \textbf{DNS} & 0.2 & 2\% & 600 & No & \\
+& WiDi & 2000 & 3\% & 600 & No & Needs DNS\\
+& Hotspot & 2000 & 5\% & 600 & No & Permission\\
+\hline
+\parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{BT}}} & Classic & 50 & 2\% & 600 & No & Unstable\\
+& \textbf{Nearby} & 50 & 2\% & 600 & No & \\
+& \textbf{BTLE} & 50 & 2\% & 600 & Yes & \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[H]
+\caption{iOS protocols and range results}
+\centering
+\begin{tabular}{|c|l|r|r|r|c|l|}
+\hline
+& \multicolumn{1}{c|}{Protocol} & \multicolumn{1}{c|}{Throughput} & \multicolumn{1}{c|}{Battery} & \multicolumn{1}{c|}{Range} & \multicolumn{1}{c|}{Android} & \multicolumn{1}{c|}{Issues}\\
+&                               & \multicolumn{1}{c|}{Avg. kbps}  & \multicolumn{1}{c|}{per hour} & \multicolumn{1}{c|}{LoS ft} &                  &                            \\
+\hline
+\parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{WiFi}}} & Bonjour & 0.2 & 5\% & 200 & No & Battery\\
+& MPC & 2000 & 5\% & 200 & No & Battery\\
+& WiDi & 2000 & 5\% & 200 & No & Battery\\
+\hline
+& \textbf{BTLE} & 50 & 2\% & 800 & Yes & \\
+\hline
+\end{tabular}
+\end{table}
+
+%
 \section{Experimental Results}
 \label{sec:eval}
+%
+
+%
+
+%
+
+%
+\subsection{Pilot test results}
+\label{sec:romania}
+%
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{figs/romania_latency}}
+\caption{Latency results from a 25-user pilot}
+\label{fig:romania_lat}
+\end{figure}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{figs/romania_activity}}
+\caption{MNA activity during the pilot}
+\label{fig:romania_act}
+\end{figure}
+
+
+About 13\% of the messages were received at least once (depends on
+density of users in the building). Users actively used the devices for
+~5\% of the time p2p NSD achieved lower end-to-end latencies than BT
+Classic, perhaps due to its broadcast model and wide support across
+devices. Packet sizes did not affect single-hop latencies on p2p DNS,
+perhaps because most of the messages fit within single advert. Packet
+sizes did not affect single-hop latencies on BT Classic, perhaps
+because Bluetooth has a much higher bandwidth 2 out of 25 devices have
+their clocks set wrong (confusing latency results). More than 10\% of
+the messages were received in the last 5 min of message expiry,
+implying messages were discarded due to expirty, even when they did
+not reach all devices
+
+%
+\subsection{Automated test results}
+\label{sec:automated}
+%
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{figs/variety_e2e_latency}}
+\caption{Comparison of WiFi and Bluetooth interfaces in terms of
+  end-to-end latency}
+\label{fig:variety_e2e}
+\end{figure}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{figs/variety_hops}}
+\caption{Comparison of WiFi and Bluetooth interfaces in terms of
+  network topology}
+\label{fig:variety_hops}
+\end{figure}
+
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{figs/e2e_latency}}
-\caption{End-to-end latency}
+\caption{Comparison of WiFi and Bluetooth Nearby interfaces in terms
+  of end-to-end latency}
 \label{fig:e2e}
 \end{figure}
 
