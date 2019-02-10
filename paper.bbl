@@ -6,6 +6,11 @@ J.~Ahrenholz, C.~Danilov, T.~R. Henderson, and J.~H. Kim.
 \newblock In {\em MILCOM 2008 - 2008 IEEE Military Communications Conference},
   pages 1--7, Nov 2008.
 
+\bibitem{bruno-mesh-2005}
+R.~Bruno, M.~Conti, and E.~Gregori.
+\newblock Mesh networks: commodity multihop ad hoc networks.
+\newblock {\em IEEE Communications Magazine}, 43(3):123--131, March 2005.
+
 \bibitem{clausen-olsr-2003}
 T.~Clausen and P.~Jacquet.
 \newblock Optimized link state routing protocol (olsr).
@@ -44,6 +49,10 @@ M.~Mauve, J.~Widmer, and H.~Hartenstein.
 {Naval Research Laboratory}.
 \newblock Extendable mobile ad-hoc network emulator (emane).
 \newblock Available at http://cs.itd.nrl.navy.mil/work/emane/.
+
+\bibitem{firechat}
+{Open Garden Inc.}
+\newblock https://www.opengarden.com/firechat/.
 
 \bibitem{perkins-aodv-2003}
 C.~Perkins, E.~Belding-Royer, and S.~Das.

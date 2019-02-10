@@ -5,46 +5,49 @@ The style file: abbrv.bst
 Database file #1: smartcomp19.bib
 Warning--empty journal in emane
 Warning--empty year in emane
+Warning--empty title in firechat
+Warning--empty journal in firechat
+Warning--empty year in firechat
 Warning--empty title in perkins-ad-hoc-2001
-You've used 11 entries,
+You've used 13 entries,
             2118 wiz_defined-function locations,
-            570 strings with 5597 characters,
-and the built_in function-call counts, 3873 in all, are:
-= -- 380
-> -- 176
+            581 strings with 5805 characters,
+and the built_in function-call counts, 4432 in all, are:
+= -- 431
+> -- 201
 < -- 5
-+ -- 71
-- -- 58
-* -- 276
-:= -- 637
-add.period$ -- 35
-call.type$ -- 11
-change.case$ -- 61
++ -- 81
+- -- 66
+* -- 322
+:= -- 733
+add.period$ -- 40
+call.type$ -- 13
+change.case$ -- 70
 chr.to.int$ -- 0
-cite$ -- 14
-duplicate$ -- 159
-empty$ -- 303
-format.name$ -- 58
-if$ -- 828
+cite$ -- 19
+duplicate$ -- 180
+empty$ -- 347
+format.name$ -- 66
+if$ -- 939
 int.to.chr$ -- 0
-int.to.str$ -- 11
-missing$ -- 12
-newline$ -- 57
-num.names$ -- 22
-pop$ -- 68
+int.to.str$ -- 13
+missing$ -- 14
+newline$ -- 66
+num.names$ -- 26
+pop$ -- 81
 preamble$ -- 1
-purify$ -- 51
+purify$ -- 59
 quote$ -- 0
-skip$ -- 109
+skip$ -- 121
 stack$ -- 0
-substring$ -- 207
-swap$ -- 38
+substring$ -- 238
+swap$ -- 39
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 42
-warning$ -- 3
-while$ -- 36
-width$ -- 13
-write$ -- 126
-(There were 3 warnings)
+type$ -- 50
+warning$ -- 6
+while$ -- 41
+width$ -- 15
+write$ -- 144
+(There were 6 warnings)
