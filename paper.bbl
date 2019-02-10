@@ -1,4 +1,10 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{arenholz-core-2008}
+J.~Ahrenholz, C.~Danilov, T.~R. Henderson, and J.~H. Kim.
+\newblock Core: A real-time network emulator.
+\newblock In {\em MILCOM 2008 - 2008 IEEE Military Communications Conference},
+  pages 1--7, Nov 2008.
 
 \bibitem{clausen-olsr-2003}
 T.~Clausen and P.~Jacquet.
@@ -33,6 +39,11 @@ S.~Marti, T.~J. Giuli, K.~Lai, and M.~Baker.
 M.~Mauve, J.~Widmer, and H.~Hartenstein.
 \newblock A survey on position-based routing in mobile ad hoc networks.
 \newblock {\em IEEE Network}, 15(6):30--39, Nov 2001.
+
+\bibitem{emane}
+{Naval Research Laboratory}.
+\newblock Extendable mobile ad-hoc network emulator (emane).
+\newblock Available at http://cs.itd.nrl.navy.mil/work/emane/.
 
 \bibitem{perkins-aodv-2003}
 C.~Perkins, E.~Belding-Royer, and S.~Das.

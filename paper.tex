@@ -9,6 +9,19 @@
 \usepackage{xcolor}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\newcommand{\taskprefix}{CH}
+\newcommand{\tasksize}{\normalsize}
+\newenvironment{taskenv}[1]{\begin{list}{{\tasksize\sc \theenumi.}}{\usecounter{enumi}
+      \settowidth{\labelwidth}{{\tasksize\sc \taskprefix#1-99}}
+      \setlength{\leftmargin}{\labelwidth}
+      %\addtolength{\leftmargin}{2.0\labelsep}
+}}{\end{list}}
+\newcounter{task}
+\setcounter{task}{-1}
+\newcommand{\btask}{\begin{taskenv}{\taskprefix}\setcounter{enumi}{\value{task}}\renewcommand{\theenumi}{\taskprefix$_{\arabic{enumi}}$}}
+\newcommand{\etask}{\setcounter{task}{\value{enumi}}\renewcommand{\theenumi}{\arabic{enumi}.}\end{taskenv}}
+
 \begin{document}
 
 \title{Large-scale peer-to-peer network for mobile platforms: Challenges and Experiences\\
@@ -110,33 +123,38 @@ separate classes of applications: communication in
 densely populated areas, e.g., sports arenas.  The following are the
 key characteristics in these scenarios:
 
-\begin{itemize}
-\item No secondary communication infrastructure such as WiFi
+%
+\btask
+%
+\item\label{c:0} No secondary communication infrastructure such as WiFi
   access points to fall back on
-\item Network nodes are mobile, pattern of mobility is not
+\item\label{c:1} Network nodes are mobile, pattern of mobility is not
   predictable
-\item New information may arrive at any time
-\item Trustworthy information is scarce, misinformation and
+\item\label{c:2} New information may arrive at any time
+\item\label{c:3} Trustworthy information is scarce, misinformation and
   rumours are common place
-\item  Small payloads suffice in many cases and information
+\item\label{c:4}  Small payloads suffice in many cases and information
   stays relevant for a few minutes
-\item  Device battery is a scarce resource, power supply
+\item\label{c:5}  Device battery is a scarce resource, power supply
   for recharging may not be available
-\item  Devices are owned by citizens, deployment of
+\item\label{c:6}  Devices are owned by citizens, deployment of
   special-purpose devices is cost prohibitive
-\end{itemize}
+%
+\etask
+%
 
 The above needs are well-recognized in the industry with several
 ambitious attempts to address them, e.g., Google Loon
 project\footnote{https://loon.co} and Facebook
 Aquilla\footnote{https://en.wikipedia.org/wiki/Facebook\_Aquila},
-though with limited impact given. Leveraging user mobile devices as
-peer nodes for a large-scale deployment has been attempted before,
-e.g., the Serval project \cite{gardner-stephen-serval-2011}. Serval
-mesh enables p2p communication over on-device WiFi radio, but requires
-root access to the device via jailbreaking. Although significant
-leassons have been learned through these attempts, a mass-scale p2p
-network for such applications remains elusive.
+though with limited impact. Leveraging user mobile devices as peer
+nodes for a large-scale deployment has been another theme in the prior
+works, e.g., the Serval project
+\cite{gardner-stephen-serval-2011}. Serval mesh enables p2p
+communication over on-device WiFi radio, but requires root access to
+the device via jailbreaking. Although significant leassons have been
+learned through these attempts, a mass-scale p2p network for such
+applications remains elusive.
 
 A vast majority of the literature has focused on a traditional model
 of stateful and reliable networking. Specifically, the nodes maintain
@@ -146,10 +164,12 @@ link state or distance vectors
 network utilization. Given the application characteristics above, this
 paper identifies main practical challenges associated with modern
 device platforms and finds novel ways to overcome them.  This leads to
-a new paradigm in p2p networking that is connection-less,
-delay-tolerant, and zero-routing.  With extensive experiments and
-experience of deploying to almost $10$ million users, MNA represents a
-way forward for large-scale p2p networks.
+MNA --- a new paradigm in p2p networking that employs connection-less,
+delay-tolerant, and zero-routing overhead protocols.  MNA is
+implemented on both Android and iOS as an SDK and integrated with the
+Weather Channel mobile apps. With extensive experiments and experience
+of deploying to almost $10$ million users, MNA represents a way
+forward for large-scale p2p networks.
 
 In summary, this paper makes the following key contributions:
 \begin{itemize}
@@ -157,7 +177,7 @@ In summary, this paper makes the following key contributions:
   characteristics
 \item A deeper investigation of the practical challenges in supporting
   the above class of applications
-\item A novel p2p networking implementation using multiple radio
+\item A novel p2p networking SDK using multiple radio
   channels for modern mobile platforms (Android and iOS)
 \item Experimental evaluation and deployment statistics
 \end{itemize}
@@ -165,22 +185,26 @@ In summary, this paper makes the following key contributions:
 In the following, Section~\ref{sec:challenges} describes the practical
 challenges. Section~\ref{sec:architecture} outlines the architectural
 details of MNA along with platform-specific implementation issues for
-Android and iOS. Experimental evaluation and deployment statistics are
-presented in Section~\ref{sec:eval}.  A deeper look at the literature
-and contrast to MNA is summarized in Section~\ref{sec:related} with
-conclusions in Section~\ref{sec:conclude}.
+Android and iOS in addressing the challenges. Experimental evaluation
+and deployment statistics are presented in Section~\ref{sec:eval}.  A
+deeper look at the literature and contrast to MNA is summarized in
+Section~\ref{sec:related} with conclusions in
+Section~\ref{sec:conclude}.
 %
 \section{Practical Challenges}
 \label{sec:challenges}
 %
-We focus on four main challenges and describe a system implementation
-for addressing them. 
+We present the main challenges for modern mobile device platforms in
+meeting the classes of applications described above. These have been
+uncovered via extensive experiments and in some cases include direct
+feedback from the makers of Android and iOS.
 %
-\subsection{Background execution} 
+\subsection{Operating system constraints}
+\label{ch:os}
 %
-Even when a user is not interacting with the weather app, or worse
-yet, when the device is not being used at all, the devices must
-actively discover peer devices to send and receive potentially
+Due to \ref{c:2}, even when a user is not interacting with the weather
+app, or worse yet, when the device is not being used at all, the
+devices must discover peer devices to receive and formward potentially
 life-saving weather information. Although modern mobile operating
 systems such as Android and iOS offer APIs to discover and advertise
 information to peer devices over WiFi and Bluetooth interfaces,
@@ -188,79 +212,100 @@ peer-to-peer connections do not work when the same APIs are accessed
 while the app is in the background. Prior works, widely document these
 challenges and take the approach of having special access on the
 devices, e.g., jail-breaking or rooting
-\cite{gardner-stephen-serval-2011}. We overcame these challenges via
-innovative techniques, without resorting to hacks that may violate
-user security or Appstore guidelines. With our technique, exchange of
-information happens without making network connections. As we describe
-later, this is achieved by splitting the messages into small enough
-chunks so that they can be stuffed into service advertisements
-themselves and broadcast over multiple advertisements in a quick
-succession.
+\cite{gardner-stephen-serval-2011}. Clearly, such an approach does not
+scale to mass adoption.
 %
 \subsection{Power constraints}
+\label{ch:power}
 %
-Since devices may be offline when new weather information
-arrives, MNA on each device must remain active at all times to be able
-to discover new information as soon as it arrives. However, the MNA
-activity must keep the device battery consumption to a minimum. This
-is a challenge because advertising and discovery are power-hungry
-operations over the radio channels. Our approach here is
-two-pronged. Firstly, via extensive experiments on a large number of
-devices, we fine-tune the algorithm governing the intervals at which
-discovery and advertisements occur. In a nutshell, receiving new
-information during a period causes MNA to be more aggressive in
-discovery and advertisement. Similarly, lack of new information for a
-period makes the device less aggressive. Secondly, we allow ``wake
-up'' messages to be broadcast in the network ahead of an anticipated
-severe weather event. When devices receive such messages, they
-schedule themselves to remain aggressive during the specified window
-of time. Outside of this window, the device can afford to have long
-sleep cycles and conserve power. With these techniques, our testing
-shows less than 1\% battery consumption per hour on most device
-models.
+Since devices may be offline when new weather information arrives, MNA
+processes on each peer must remain active at all times to be able to
+discover new information as soon as it arrives. Further, as there is
+no back up infrastructure (\ref{c:0}) and a set of peers in range can
+change at any time (\ref{c:1}), each peer is responsible for
+constantly forwarding available information to other peers via
+advertisements. However, due to \ref{c:5}, the MNA activity must keep
+the device battery consumption to a minimum. This is a challenge
+because advertising and discovery are power-hungry operations over the
+radio channels.
 %
 \subsection{Testing p2p networks}
 %
-Given the heterogeneity of devices and operating system
-distributions in the market, it is quite a challenge to test whether
-MNA functions as expected on a given device. Further, running test
+Given the heterogeneity of devices and operating system distributions
+owned by users (\ref{c:6}), it is challenging to test whether or not
+MNA functions as expected on a single device. Further, running test
 scenarios on a p2p network at large-scale is non-trivial given that a
 large number of devices need to take specific coordinated action
 followed by coordinated observations to determine whether a test
-passes or fails. This is not a challenge in traditional mobile
-application development as the software is confined within a single
-connected device. We developed test automation tools and processes
-such that multiple devices can be controlled from a single test
-station and follow prescribed steps to generate, send, and receives
-messages to play out a test scenario. Finally, the framework allows
-automated analysis of the observations to determine the test
-result. This capability was instrumental in uncovering bugs at a fast
-pace to meet the aggressive timeline and avoid the cost of
-acquisition. Further, the automation framework is general and can be
-expressly applied to test other apps in this fashion.
+passes or fails. Further, since range and mobility affect p2p
+communications and they are unpredictable (\ref{c:1}), it is important
+to run test cases under various mobility patterns across all nodes in
+the network. Emulated mobility frameworks such as CORE
+\cite{arenholz-core-2008} and EMANE \cite{emane} fall short as the
+connection latencies and wireless transmission are specific to device
+model and radio. This is not a challenge in traditional mobile
+application development as the application functionality is confined
+within a single connected device.
 %
 \subsection{Trust in information}
 %
-As devices with mesh advertise on a continuous basis, it may
-be possible for a malicious attacker to listen for such advertisements
-and reverse-engineer the message formats and protocols used. Then, the
-attackers may generate fake messages and advertise them, e.g., a fake
-tornado alert. Such false messages cannot be distinguished from the
-real ones, and MNA will end up propagating them to as many devices as
-possible, ``poisoning'' the network. In general, veracity of such
-information cannot be independently verified in open decentralized
-distributed systems and previous work on peer-to-peer networks do not
-address this challenge. In our approach, since the origin of weather
-information is the Weather Channel service, digital signatures can be
-attached to all weather alerts broadcast from the service. The mobile
-application is distributed with the corresponding public key so that
-digital signatures from the service can be verified. If a message
-fails such a verification, it is discarded and not forwarded any
-further.
-
+As user devices with MNA advertise on a continuous basis over
+well-known radio protocols, it may be possible for a malicious
+attacker to listen for such advertisements and reverse-engineer the
+message formats and protocols used. Then, the attackers may generate
+fake messages and advertise them, e.g., a fake tornado alert. Given a
+lack of trusted information in such scenarios (\ref{c:3}),
+misinformation campaigns can have disastrous consequences.  In open
+decentralized systems, such false messages cannot be distinguished
+from the real ones, and MNA will end up propagating them to as many
+devices as possible, ``poisoning'' the network. In general, veracity
+of such information cannot be independently verified in open
+decentralized distributed systems and previous work on peer-to-peer
+networks do not address this challenge.
+%
 \section{System Architecture}
 \label{sec:architecture}
+%
 
+
+We overcame these challenges via innovative techniques, without
+resorting to hacks that may violate user security or Appstore
+guidelines. With our technique, exchange of information happens
+without making network connections. As we describe later, this is
+achieved by splitting the messages into small enough chunks so that
+they can be stuffed into service advertisements themselves and
+broadcast over multiple advertisements in a quick succession.
+
+Our approach here is two-pronged. Firstly, via extensive experiments
+on a large number of devices, we fine-tune the algorithms governing
+the intervals at which discovery and advertisements occur. In a
+nutshell, receiving new information during a period causes MNA to be
+more aggressive in discovery and advertisement. Similarly, lack of new
+information for a period makes the device less aggressive. Secondly,
+we allow ``wake up'' messages to be broadcast in the network ahead of
+an anticipated severe weather event. When devices receive such
+messages, they schedule themselves to remain aggressive during the
+specified window of time. Outside of this window, the device can
+afford to have long sleep cycles and conserve power. With these
+techniques, our testing shows less than 1\% battery consumption per
+hour on most device models.
+
+We developed test automation tools and processes such that multiple
+devices can be controlled from a single test station and follow
+prescribed steps to generate, send, and receives messages to play out
+a test scenario. Finally, the framework allows automated analysis of
+the observations to determine the test result. This capability was
+instrumental in uncovering bugs at a fast pace to meet the aggressive
+timeline and avoid the cost of acquisition. Further, the automation
+framework is general and can be expressly applied to test other apps
+in this fashion.
+
+In our approach, since the origin of weather information is the
+Weather Channel service, digital signatures can be attached to all
+weather alerts broadcast from the service. The mobile application is
+distributed with the corresponding public key so that digital
+signatures from the service can be verified. If a message fails such a
+verification, it is discarded and not forwarded any further.
 \section{Experimental Results}
 \label{sec:eval}
 
