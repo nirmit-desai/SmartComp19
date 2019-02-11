@@ -354,7 +354,7 @@ actually deployed are in bold.
 & WiDi & 2000 & 3\% & 600 & No & Needs DNS\\
 & Hotspot & 2000 & 5\% & 600 & No & Permission\\
 \hline
-\parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{BT}}} & Classic & 50 & 2\% & 600 & No & Unstable\\
+\parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{BT}}} & \textbf{Classic} & 50 & 2\% & 600 & No & \\
 & \textbf{Nearby} & 50 & 2\% & 600 & No & \\
 & \textbf{BTLE} & 50 & 2\% & 600 & Yes & \\
 \hline
@@ -487,12 +487,12 @@ verification, it is discarded and not forwarded any further.
 \subsection{WiFi DNS}
 \label{sec:wifi}
 %
-DNS service discovery is a widely supported
-protocol \cite{cheshire-dns-sd-2013}. On Android, WiFi DNS improvises
-on this standard such that the exchange of information happens without
-making network connections at all. This is achieved by splitting the
-message payloads into small enough chunks and stuffing them into
-service advertisements as txt records and broadcast over multiple
+DNS service discovery is a widely supported protocol
+\cite{cheshire-dns-sd-2013}. On Android, WiFi DNS improvises on this
+standard such that the exchange of information happens without making
+network connections at all. This is achieved by splitting the message
+payloads into small enough chunks and stuffing them into service
+advertisements as txt records and broadcast over multiple
 advertisements in a quick succession. Since there are no connections
 being made, the messages can be exchanged without prompting the user
 to grant permissions for each connection. Since no peer connections
@@ -500,7 +500,22 @@ are needed and advertisements and discovery are broadcast, WiFi DNS is
 a broadcast protocol. On iOS, Bonjour protocol is built on DNS service
 discovery but is power-hungry and does not interoperate with WiFi DNS
 on Android. Algorithm~\ref{algo:dns} outlines the peer process for
-WiFi DNS.
+WiFi DNS. Power conservation via time intervals is achieved by
+manupulating $T_{ad}$ and $T_{disc}$ based on traffic. 
+
+Messages from multiple applications are forwarded on the same network,
+but a peer can validate signatures only for the messages targeting an
+app it hosts. Peers simply forward messages not targeting one of their
+apps. Key benefit of this design is that the density of peers is
+available to all apps, making c2p2p scenarios viable even when an
+individual app does not have a sufficient density of users.  However,
+this also allows a malicioous jammer to generate traffic for a fake
+app and force the peers to forwad it (as they do not match any of the
+apps) until the messages expire.  Although the fake information will
+never be delivered to the apps, this issue can affect MNA throughput
+for legitimate apps. A possible solution would be to maintain a
+central registry of $a_{id}$ and distribute it to all peers across
+apps.
 
 \begin{algorithm}[htb!]
 \label{algo:dns}
@@ -518,13 +533,13 @@ WiFi DNS.
    $\mathbb{M} \gets \mathbb{M} -$ expired messages\;
    $\mathbb{M}_{sort} \gets$ $\mathbb{M}$ sorted by least advertised first\;
    $B \gets$ $\mathbb{M}_{sort}$ chunked by MTU size\;
-   dnsAdvertise ($S_{name}$, $B$)\;
+   dnsAdvertise ($S_{name}$, $p_{id}$, $B$)\;
    \If{$New = 0$}{
      $T_{ad} \gets min(T_{ad} \times 2, max_{ad})$\;
    }
  }
  \ForEach{timer expiry $T_{disc}$}{
-   dnsDiscover ($S_{name}$)\;
+   dnsDiscover ($S_{name}$, $p_{id}$)\;
    \If{$New = 0$}{
      $T_{disc} \gets min(T_{disc} \times 2, max_{disc})$\;
    }
@@ -534,17 +549,17 @@ WiFi DNS.
    $B \gets S_{disc}.B$\;
    $M_{part} \gets msg(B)$\;
    $M \gets M + M_{part}$\; 
+   \If{$M_{part}$ is not a duplicate}{
+        $T_{ad} \gets max(\frac{T_{ad}}{2}, min_{ad})$\;
+        $T_{disc} \gets max(\frac{T_{disc}}{2}, min_{disc})$\;
+        $New \gets 1$\;
+   }
    \If{$M_{part}$ was the last chunk of $M$}{
-     \If{$M$ is not a duplicate}{
-       \If{$M$ is unexpired $\wedge$ $M$ has valid signature}{
-         $\mathbb{M} \gets \mathbb{M} \cup M$\;
-         $T_{ad} \gets max(\frac{T_{ad}}{2}, min_{ad})$\;
-         $T_{disc} \gets max(\frac{T_{disc}}{2}, min_{disc})$\;
-         $New \gets 1$\;
-         \If{$M.app = a_{id}$}{
-           Notify app with $M$\;
+     \If{$M$ is unexpired}{
+         \If{$M.app = a_{id}$ $\wedge$ $M$ signature is valid}{
+             Notify app with $M$\;
          }
-       }
+         $\mathbb{M} \gets \mathbb{M} \cup M$\;
      }
    }
  }
@@ -572,6 +587,68 @@ application is in the background. MNA builds on this and leverages
 acynchronous dispatch queues to turn each peer into a Central as well
 as a Peripheral simultaneously. This architecture allows bidirectional
 data transfers without concurrency issues.
+
+\begin{algorithm}[htb!]
+\label{algo:btle}
+\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\SetAlgoLined
+\KwIn{Peer id $p_{id}$, App id $a_{id}$, Max peripherals $max_p$}
+ $S_{name} \gets$ \textsf{'MNA'}\;
+ $\mathbb{M} \gets \varnothing$\;
+ $C \gets$ new Central() in new thread\;
+ $P \gets$ new Peripheral() in new thread\;
+ $T \gets$ new data sender thread\;
+ $C$.bleDiscovery($p_{id}$, $S_{name}$)\;
+ $P$.bleAdvert($p_{id}$, $S_{name}$)\;
+ $P_{con} \gets 0$\;
+
+ \ForEach{Peripheral $peer$ found event}{
+   \If{$P_{con} < max_p$}{
+     $C$.connect($peer$)\;
+     $P_{con} \gets P_{con} + 1$\;
+   }
+ }
+
+ \ForEach{Peripheral $peer$ connected event}{
+   \ForEach{$M$ $\in$ $\mathbb{M}$}{
+     \If{$peer \notin M$.fwdList}{
+       $T$.send($M$, $peer$)\;
+     }
+   }
+ }
+
+ \ForEach{Peripheral $peer$ disconnected event}{
+    $P_{con} \gets P_{con} - 1$\;
+ }
+
+ \ForEach{Central $peer$ connected event}{
+   \ForEach{$M$ $\in$ $\mathbb{M}$}{
+     \If{$peer \notin M$.fwdList}{
+       $T$.send($M$, $peer$)\;
+     }
+   }
+ }
+
+ \ForEach{$M$ received event from $T$.receive()}{
+   \If{$M$ is not a duplicate $\wedge$ $M$ is unexpired}{
+     \If{$M.app = a_{id}$ $\wedge$ $M$ signature is valid}{
+       Notify app with $M$\;
+     }
+     $M$.fwdList $\gets$ $M$.fwdList $\cup$ $p_{id}$\;
+     $\mathbb{M} \gets \mathbb{M} \cup M$\;     
+     $T$.send($M$, all connected peers)\;
+   }
+ }
+ \tcc{For testing only}
+ \ForEach{app request to send $M$}{
+   \If{$M$ has not expired}{
+     $M$.fwdList $\gets$ $p_{id}$ \;
+     $\mathbb{M} \gets \mathbb{M} \cup M$\;
+     $T$.send($M$, all connected peers)\;
+   }
+ }
+ \caption{BTLE peer algorithm}
+\end{algorithm}
 
 
 \section{Experimental Results}
