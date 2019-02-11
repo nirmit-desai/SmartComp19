@@ -3,51 +3,55 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: paper.aux
 The style file: abbrv.bst
 Database file #1: smartcomp19.bib
+Warning--empty journal in mna
+Warning--empty year in mna
+Warning--empty journal in mna-test-demo
+Warning--empty year in mna-test-demo
 Warning--empty journal in emane
 Warning--empty year in emane
 Warning--empty title in firechat
 Warning--empty journal in firechat
 Warning--empty year in firechat
 Warning--empty title in perkins-ad-hoc-2001
-You've used 14 entries,
+You've used 16 entries,
             2118 wiz_defined-function locations,
-            587 strings with 5899 characters,
-and the built_in function-call counts, 4674 in all, are:
-= -- 454
-> -- 214
+            594 strings with 6081 characters,
+and the built_in function-call counts, 5090 in all, are:
+= -- 492
+> -- 228
 < -- 5
-+ -- 86
-- -- 70
-* -- 336
-:= -- 778
-add.period$ -- 43
-call.type$ -- 14
-change.case$ -- 75
++ -- 92
+- -- 74
+* -- 358
+:= -- 854
+add.period$ -- 49
+call.type$ -- 16
+change.case$ -- 83
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 190
-empty$ -- 364
-format.name$ -- 70
-if$ -- 987
+cite$ -- 26
+duplicate$ -- 210
+empty$ -- 398
+format.name$ -- 74
+if$ -- 1067
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 15
-newline$ -- 71
-num.names$ -- 28
-pop$ -- 86
+int.to.str$ -- 16
+missing$ -- 17
+newline$ -- 81
+num.names$ -- 32
+pop$ -- 100
 preamble$ -- 1
-purify$ -- 63
+purify$ -- 69
 quote$ -- 0
-skip$ -- 129
+skip$ -- 141
 stack$ -- 0
-substring$ -- 243
+substring$ -- 253
 swap$ -- 40
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 54
-warning$ -- 6
-while$ -- 43
-width$ -- 16
-write$ -- 154
-(There were 6 warnings)
+type$ -- 62
+warning$ -- 10
+while$ -- 47
+width$ -- 18
+write$ -- 172
+(There were 10 warnings)

@@ -114,9 +114,8 @@ growth of smartphones, large-scale real-world implementations may
 become feasible. This paper describes a real-world implementation of a
 p2p delay-tolerant network, called Mesh Network Alerts (MNA), for
 relaying severe weather information to millions of mobile device users
-as part of the Weather Channel
-app\footnote{https://weather.com/apps/ibm/meshnetworkalerts} on both
-android and iOS platforms. 
+as part of the Weather Channel app \cite{mna} on both android and iOS
+platforms.
 
 Before describing MNA, it is critical to identify applications that
 need p2p communication, given pervasive Internet connectivity. Doing
@@ -321,7 +320,7 @@ peers, controlling the flooding.  As there are no control messages or
 any other overhead for routing, we call this \emph{zero-overhead}
 routing.
 
-The following describes how the c2p2p architecture addresses the
+The following assesses the c2p2p architecture relative to the
 challenges identified above along with known limitations. Further, to
 realize this architecture on mobile devices, we evaluated a variety of
 protocols on both Android and iOS. As described later, WiFi DNS on
@@ -442,27 +441,53 @@ number of devices, we fine-tune the algorithms governing the intervals
 at which discovery and advertisements occur. In a nutshell, receiving
 new information during a period causes MNA to be more aggressive in
 discovery and advertisement. Similarly, lack of new information for a
-period makes the device less aggressive. Secondly, we allow ``wake
-up'' messages to be broadcast in the network ahead of an anticipated
-severe weather event. When devices receive such messages, they
-schedule themselves to remain aggressive during the specified window
-of time. Outside of this window, the device can afford to have long
-sleep cycles and conserve power. With these techniques, our testing
-shows less than 2\% battery consumption per hour on most device
-models.
+period makes the device less aggressive. Secondly, we allow the
+centrasl service to broadcast``wake up'' messages ahead of an
+anticipated severe weather event.  When devices receive such messages,
+they schedule themselves to remain aggressive during the specified
+window of time.  Outside of this window, the device can afford to have
+long sleep cycles and conserve power. With these techniques, our
+testing shows less than 2\% battery consumption per hour on most
+device models.
 %
 \subsection{Testing p2p networks}
 \label{sec:texting}
 %
-We developed test automation tools and processes such that multiple
-devices can be controlled from a single test station and follow
-prescribed steps to generate, send, and receives messages to play out
-a test scenario. Finally, the framework allows automated analysis of
-the observations to determine the test result. This capability was
-instrumental in uncovering bugs at a fast pace to meet the aggressive
-timeline and avoid the cost of acquisition. Further, the automation
-framework is general and can be expressly applied to test other apps
-in this fashion.
+We developed novel test automation tools and processes that control
+multiple devices from a single test station and follow prescribed
+steps to generate, send, and receives messages to play out a test
+scenario.  The framework allows automated analysis of the observations
+to determine the test result. This capability was instrumental in
+uncovering bugs at a fast pace with tens of physical devices emloyed
+for automated testing.  Further, the automation framework is general
+and can be expressly applied to test other apps in this fashion.
+
+Figure~\ref{fig:test_arch} shows the overall test automnation
+architecture. A tester specifies high-level test cases and expected
+results in a platform and device agnostic fashion. Mobile devices run
+a UI proxy for executing platform and device-specific UI command while
+a central laptop terminal acts as the overall orchestrator and
+translates high-level test cases and distributes them to
+devices. Since the orchestrator needs a wired access to the devices
+and the devices cannot be programmed to move (unlike drones and bots),
+testing of range and mobility patterns needs to done manually, which
+is a known limitation.
+
+A key innovation here is the platform-independent language for
+specifying high-level test cases and a small set of primitive commands
+it translates to. We describe here the list of primitive commands and
+a screen recording across seven Android devices demonstrates this
+powerful capability \cite{mna-test-demo}.
+\begin{itemize}
+\item \textsf{syncAll} Wait for all devices to reach this point
+\item \textsf{object.find} Find a UI object by name or position
+\item \textsf{object.click} Click a UI object
+\item \textsf{sleep} Wait for the specified duration
+\item \textsf{setupSystemAlert} Respond to a system popup
+\item \textsf{text.set} Highlight a text input box
+\item \textsf{text.write} Write text to the text box
+\item \textsf{swipe} Swipe to the left/right or up/down
+\end{itemize}
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{figs/test_arch}}
@@ -474,12 +499,22 @@ in this fashion.
 \subsection{Trust in information}
 \label{sec:trust}
 %
-In our approach, since the origin of weather information is the
-Weather Channel service, digital signatures can be attached to all
-weather alerts broadcast from the service. The mobile application is
-distributed with the corresponding public key so that digital
-signatures from the service can be verified. If a message fails such a
-verification, it is discarded and not forwarded any further.
+In c2p2p, since the origin of information is always the central
+service, digital signatures can be attached to all messages
+originating from the service. The mobile application is distributed
+with the corresponding public key so that digital signatures from the
+service can be verified.  If a message fails such a verification, it
+is discarded and not forwarded any further. 
+
+Peers cannot originate messages however as then a malicious peer can
+join the network, exchange keys with other peers, start generating,
+signing, and spreading fake information. This has been a longstanding
+problem for open decentralized systems. Requiring all peers to
+register their identity with a certificate authority and reporting the
+originators of fake information may discourage malicious behavior.
+Clearly, this is even harder to solve than the spread of fake
+information over the Internet because ground truth is hard to find and
+malicious peers can report genuine sources of information as well.
 %
 \section{Algorithms}
 \label{sec:algo}
@@ -588,6 +623,16 @@ acynchronous dispatch queues to turn each peer into a Central as well
 as a Peripheral simultaneously. This architecture allows bidirectional
 data transfers without concurrency issues.
 
+Algorithm~\ref{algo:btle} outlines the peer process for BTLE. The
+biggest difference with WiFi DNS is that discovery and advertisements
+happen only once per app launch. Secondly, the entire peer process is
+event-driven, so the app can sleep when there are no events to
+process. The list of forwarders for each message $M.fwdList$ is key in
+controlling the duplicates and in turn network utilization without
+overhead messages. In practice, limiting number of Peripherals a
+Central connects to enables reliable communications, specified by
+$max_p$.
+
 \begin{algorithm}[htb!]
 \label{algo:btle}
 \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
@@ -595,9 +640,9 @@ data transfers without concurrency issues.
 \KwIn{Peer id $p_{id}$, App id $a_{id}$, Max peripherals $max_p$}
  $S_{name} \gets$ \textsf{'MNA'}\;
  $\mathbb{M} \gets \varnothing$\;
- $C \gets$ new Central() in new thread\;
- $P \gets$ new Peripheral() in new thread\;
- $T \gets$ new data sender thread\;
+ $C \gets$ new Central() in new dispatch queue\;
+ $P \gets$ new Peripheral() in new dispatch queue\;
+ $T \gets$ new data sender dispatch queue\;
  $C$.bleDiscovery($p_{id}$, $S_{name}$)\;
  $P$.bleAdvert($p_{id}$, $S_{name}$)\;
  $P_{con} \gets 0$\;

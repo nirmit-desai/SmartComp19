@@ -28,6 +28,16 @@ P.~Gardner-Stephen and S.~Palaniswamy.
   Technologies for Humanitarian Relief}, ACWR '11, pages 71--77, New York, NY,
   USA, 2011. ACM.
 
+\bibitem{mna}
+{IBM}.
+\newblock {Mesh Network Alerts (MNA)}.
+\newblock Available at https://weather.com/apps/ibm/meshnetworkalerts.
+
+\bibitem{mna-test-demo}
+{IBM}.
+\newblock Mesh network alerts test automation demo.
+\newblock Available at https://bit.ly/2IjJ2wb.
+
 \bibitem{kiess-manet-impl-2007}
 W.~Kiess and M.~Mauve.
 \newblock A survey on real-world implementations of mobile ad-hoc networks.
