@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  10 FEB 2019 23:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  11 FEB 2019 00:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -537,78 +537,82 @@ Overfull \hbox (4.69745pt too wide) in paragraph at lines 369--380
  [][] 
  []
 
-[3 <./figs/arch.pdf>]
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 454.
+[3 <./figs/arch.pdf>] <figs/test_arch.pdf, id=31, 1138.2525pt x 596.2275pt>
+File: figs/test_arch.pdf Graphic file (type pdf)
+
+<use figs/test_arch.pdf>
+Package pdftex.def Info: figs/test_arch.pdf used on input line 468.
+(pdftex.def)             Requested size: 252.0pt x 131.99834pt.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 512.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 475.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 551.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-<figs/test_arch.pdf, id=31, 1138.2525pt x 596.2275pt>
-File: figs/test_arch.pdf Graphic file (type pdf)
- <use figs/test_arch.pdf>
-Package pdftex.def Info: figs/test_arch.pdf used on input line 530.
-(pdftex.def)             Requested size: 252.0pt x 131.99834pt.
-
 <figs/romania_latency.pdf, id=32, 900.36375pt x 540.0175pt>
 File: figs/romania_latency.pdf Graphic file (type pdf)
 
 <use figs/romania_latency.pdf>
-Package pdftex.def Info: figs/romania_latency.pdf used on input line 561.
+Package pdftex.def Info: figs/romania_latency.pdf used on input line 590.
 (pdftex.def)             Requested size: 252.0pt x 151.13794pt.
 
 <figs/romania_activity.pdf, id=33, 1122.1925pt x 494.84875pt>
 File: figs/romania_activity.pdf Graphic file (type pdf)
 
 <use figs/romania_activity.pdf>
-Package pdftex.def Info: figs/romania_activity.pdf used on input line 567.
+Package pdftex.def Info: figs/romania_activity.pdf used on input line 596.
 (pdftex.def)             Requested size: 252.0pt x 111.11719pt.
- [4 <./figs/test_arch.pdf>]
-<figs/variety_e2e_latency.pdf, id=52, 523.9575pt x 299.1175pt>
+ [4 <./figs/test_arch.pdf> <./figs/romania_latency.pdf>] <figs/variety_e2e_late
+ncy.pdf, id=57, 523.9575pt x 299.1175pt>
 File: figs/variety_e2e_latency.pdf Graphic file (type pdf)
 
 <use figs/variety_e2e_latency.pdf>
-Package pdftex.def Info: figs/variety_e2e_latency.pdf used on input line 591.
+Package pdftex.def Info: figs/variety_e2e_latency.pdf used on input line 620.
 (pdftex.def)             Requested size: 252.0pt x 143.8623pt.
 
-<figs/variety_hops.png, id=53, 524.96124pt x 298.11375pt>
+Underfull \vbox (badness 1515) has occurred while \output is active []
+
+
+<figs/variety_hops.png, id=58, 524.96124pt x 298.11375pt>
 File: figs/variety_hops.png Graphic file (type png)
 
 <use figs/variety_hops.png>
-Package pdftex.def Info: figs/variety_hops.png used on input line 598.
+Package pdftex.def Info: figs/variety_hops.png used on input line 627.
 (pdftex.def)             Requested size: 252.0pt x 143.10661pt.
 
-<figs/e2e_latency.pdf, id=55, 517.935pt x 293.095pt>
+<figs/e2e_latency.pdf, id=60, 517.935pt x 293.095pt>
 File: figs/e2e_latency.pdf Graphic file (type pdf)
 
 <use figs/e2e_latency.pdf>
-Package pdftex.def Info: figs/e2e_latency.pdf used on input line 606.
+Package pdftex.def Info: figs/e2e_latency.pdf used on input line 635.
 (pdftex.def)             Requested size: 252.0pt x 142.60706pt.
 
-<figs/duplicates.pdf, id=56, 518.93875pt x 292.09125pt>
+<figs/duplicates.pdf, id=61, 518.93875pt x 292.09125pt>
 File: figs/duplicates.pdf Graphic file (type pdf)
 
 <use figs/duplicates.pdf>
-Package pdftex.def Info: figs/duplicates.pdf used on input line 613.
+Package pdftex.def Info: figs/duplicates.pdf used on input line 642.
 (pdftex.def)             Requested size: 252.0pt x 141.84235pt.
- <figs/hops.pdf, id=57, 518.93875pt x 288.07625pt>
+ <figs/hops.pdf, id=62, 518.93875pt x 288.07625pt>
 File: figs/hops.pdf Graphic file (type pdf)
 
 <use figs/hops.pdf>
-Package pdftex.def Info: figs/hops.pdf used on input line 619.
+Package pdftex.def Info: figs/hops.pdf used on input line 648.
 (pdftex.def)             Requested size: 252.0pt x 139.89262pt.
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
- [5 <./figs/romania_latency.pdf> <./figs/romania_activity.pdf> <./figs/variety_
-e2e_latency.pdf> <./figs/variety_hops.png> <./figs/e2e_latency.pdf>] (./paper.b
-bl)
+ [5 <./figs/romania_activity.pdf> <./figs/variety_e2e_latency.pdf> <./figs/vari
+ety_hops.png>] (./paper.bbl
+Underfull \vbox (badness 1062) has occurred while \output is active []
+
+)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -620,37 +624,43 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[6 <./figs/duplicates.pdf> <./figs/hops.pdf>] (./paper.aux) )
+[6 <./figs/e2e_latency.pdf> <./figs/duplicates.pdf> <./figs/hops.pdf>]
+(./paper.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5624 strings out of 492995
- 83639 string characters out of 6132704
- 172284 words of memory out of 5000000
- 9064 multiletter control sequences out of 15000+600000
+ 5627 strings out of 492995
+ 83669 string characters out of 6132704
+ 173324 words of memory out of 5000000
+ 9067 multiletter control sequences out of 15000+600000
  47818 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,17n,35p,302b,3039s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,22n,35p,302b,3088s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc
 }</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
-usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
-r/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/l
-ocal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
-cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/loca
-l/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/
-local/texlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/te
-xlive/2017/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2
-017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-
-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2017/texmf-dist/font
-s/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/ur
-w/times/utmri8a.pfb>
-Output written on paper.pdf (6 pages, 3534776 bytes).
+</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></
+usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></us
+r/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/loc
+al/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loca
+l/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/
+texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/lo
+cal/texlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texl
+ive/2017/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/201
+7/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-di
+st/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/
+type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/urw/
+times/utmri8a.pfb>
+Output written on paper.pdf (6 pages, 3546676 bytes).
 PDF statistics:
- 168 PDF objects out of 1000 (max. 8388607)
- 111 compressed objects within 2 object streams
+ 172 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

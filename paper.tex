@@ -428,71 +428,9 @@ Hotspot without needing user permission.  However, both Hotspot and
 WiDi suffer from higher battery consumption than DNS and hence were
 not deployed. All Android protocols leverage foreground services to
 continue discovery and advertisement operations in the background
-indefinitely. Deployed protocols (WiFi DNS, BT Nearby, and BTLE) are
-described in detail in the following.
+indefinitely. Algorithms for WiFi DNS and BTLE are described in detail
+in Section~\ref{sec:algo}.
 
-\noindent\textbf{WiFi DNS} DNS service discovery is a widely supported
-protocol \cite{cheshire-dns-sd-2013}. On Android, WiFi DNS improvises
-on this standard such that the exchange of information happens without
-making network connections at all. This is achieved by splitting the
-message payloads into small enough chunks and stuffing them into
-service advertisements as txt records and broadcast over multiple
-advertisements in a quick succession. Since there are no connections
-being made, the messages can be exchanged without prompting the user
-to grant permissions for each connection. Since no peer connections
-are needed and advertisements and discovery are broadcast, WiFi DNS is
-a broadcast protocol. On iOS, Bonjour protocol is built on DNS service
-discovery but is power-hungry and does not interoperate with WiFi DNS
-on Android. Algorithm~\ref{algo:dns} outlines the peer process for
-WiFi DNS.
-
-\begin{algorithm}[h]
-\label{algo:dns}
-\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
-\SetAlgoLined
-\KwIn{Peer id $p_{id}$, advert/discovery intervals $T_{ad}$, $T_{disc}$}
- $S_{name} \gets$ \textsf{'MNA'}\;
- $\mathbb{M} \gets \varnothing$\;
- \ForEach{timer expiry $T_{ad}$}{
-   $\mathbb{M} \gets \mathbb{M} -$ expired messages\;
-   $\mathbb{M}_{sort} \gets$ $\mathbb{M}$ sorted by least advertised first\;
-   $B \gets$ $\mathbb{M}_{sort}$ chunked by MTU size\;
-   dnsAdvertise ($S_{name}$, $B$)\;
- }
- \ForEach{timer expiry $T_{disc}$}{
-   dnsDiscover ($S_{name}$)\;
- }
- \ForEach{discovered service callback $S_{disc}$}{
-   $B \gets S_{disc}.B$\;
-   $M_{part} \gets msg(B)$\;
-   $M \gets M + M_{part}$\; 
-   \If{$M_{part}$ was the last chunk of $M$}{
-     \If{$M$ is unexpired $\wedge$ $M$ has valid signature}{
-       $\mathbb{M} \gets \mathbb{M} \cup M$\;
-     }
-   }
- }
- \tcc{For testing only}
- \ForEach{app request to send $M$}{
-   \If{$M$ has not expired}{
-     $\mathbb{M} \gets \mathbb{M} \cup M$\;
-   }
- }
- \caption{WiFi DNS peer algorithm}
-\end{algorithm}
-
-\noindent\textbf{BTLE} The only protocol that stays reliably active in
-background without violating iOS developer guidelines is BTLE. Unlike
-Android, iOS applications do not need to request discovery and
-advertisements contunually. Once a BTLE Peripheral (role that has
-information) is advertised and a Central (role that receives
-information) requests discovery, the app is allowed to go to
-sleep. When a matching central or a peripheral device is found, iOS
-wakes up the application app to handle such an event, even when the
-application is in the background. MNA builds on this and leverages
-acynchronous dispatch queues to turn each peer into a Central as well
-as a Peripheral simultaneously. This architecture allows bidirectional
-data transfers without concurrency issues.
 %
 \subsection{Power constraints}
 \label{sec:power}
@@ -542,9 +480,100 @@ weather alerts broadcast from the service. The mobile application is
 distributed with the corresponding public key so that digital
 signatures from the service can be verified. If a message fails such a
 verification, it is discarded and not forwarded any further.
-
-
 %
+\section{Algorithms}
+\label{sec:algo}
+%
+\subsection{WiFi DNS}
+\label{sec:wifi}
+%
+DNS service discovery is a widely supported
+protocol \cite{cheshire-dns-sd-2013}. On Android, WiFi DNS improvises
+on this standard such that the exchange of information happens without
+making network connections at all. This is achieved by splitting the
+message payloads into small enough chunks and stuffing them into
+service advertisements as txt records and broadcast over multiple
+advertisements in a quick succession. Since there are no connections
+being made, the messages can be exchanged without prompting the user
+to grant permissions for each connection. Since no peer connections
+are needed and advertisements and discovery are broadcast, WiFi DNS is
+a broadcast protocol. On iOS, Bonjour protocol is built on DNS service
+discovery but is power-hungry and does not interoperate with WiFi DNS
+on Android. Algorithm~\ref{algo:dns} outlines the peer process for
+WiFi DNS.
+
+\begin{algorithm}[htb!]
+\label{algo:dns}
+\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\SetAlgoLined
+\KwIn{Peer id $p_{id}$}
+\KwIn{App id $a_{id}$, max advert/discovery intervals $max_{ad}$, $max_{disc}$}
+\KwIn{min advert/discovery intervals $min_{ad}$, $min_{disc}$}
+ $S_{name} \gets$ \textsf{'MNA'}\;
+ $\mathbb{M} \gets \varnothing$\;
+ $T_{ad} \gets min_{ad}$\;
+ $T_{disc} \gets min_{disc}$\;
+ $New \gets 0$
+ \ForEach{timer expiry $T_{ad}$}{
+   $\mathbb{M} \gets \mathbb{M} -$ expired messages\;
+   $\mathbb{M}_{sort} \gets$ $\mathbb{M}$ sorted by least advertised first\;
+   $B \gets$ $\mathbb{M}_{sort}$ chunked by MTU size\;
+   dnsAdvertise ($S_{name}$, $B$)\;
+   \If{$New = 0$}{
+     $T_{ad} \gets min(T_{ad} \times 2, max_{ad})$\;
+   }
+ }
+ \ForEach{timer expiry $T_{disc}$}{
+   dnsDiscover ($S_{name}$)\;
+   \If{$New = 0$}{
+     $T_{disc} \gets min(T_{disc} \times 2, max_{disc})$\;
+   }
+   $New \gets 0$\;
+ }
+ \ForEach{discovered service callback $S_{disc}$}{
+   $B \gets S_{disc}.B$\;
+   $M_{part} \gets msg(B)$\;
+   $M \gets M + M_{part}$\; 
+   \If{$M_{part}$ was the last chunk of $M$}{
+     \If{$M$ is not a duplicate}{
+       \If{$M$ is unexpired $\wedge$ $M$ has valid signature}{
+         $\mathbb{M} \gets \mathbb{M} \cup M$\;
+         $T_{ad} \gets max(\frac{T_{ad}}{2}, min_{ad})$\;
+         $T_{disc} \gets max(\frac{T_{disc}}{2}, min_{disc})$\;
+         $New \gets 1$\;
+         \If{$M.app = a_{id}$}{
+           Notify app with $M$\;
+         }
+       }
+     }
+   }
+ }
+ \tcc{For testing only}
+ \ForEach{app request to send $M$}{
+   \If{$M$ has not expired}{
+     $\mathbb{M} \gets \mathbb{M} \cup M$\;
+   }
+ }
+ \caption{WiFi DNS peer algorithm}
+\end{algorithm}
+%
+\subsection{BTLE}
+\label{sec:btle}
+%
+The only protocol that stays reliably active in
+background without violating iOS developer guidelines is BTLE. Unlike
+Android, iOS applications do not need to request discovery and
+advertisements contunually. Once a BTLE Peripheral (role that has
+information) is advertised and a Central (role that receives
+information) requests discovery, the app is allowed to go to
+sleep. When a matching central or a peripheral device is found, iOS
+wakes up the application app to handle such an event, even when the
+application is in the background. MNA builds on this and leverages
+acynchronous dispatch queues to turn each peer into a Central as well
+as a Peripheral simultaneously. This architecture allows bidirectional
+data transfers without concurrency issues.
+
+
 \section{Experimental Results}
 \label{sec:eval}
 %
