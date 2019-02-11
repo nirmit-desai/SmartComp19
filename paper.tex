@@ -5,12 +5,16 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{array,multirow,graphicx}
 \usepackage{float}
-\usepackage{algorithmic}
+%\usepackage{algorithmic}
+\usepackage[ruled,vlined]{algorithm2e}
 \usepackage{textcomp}
-\usepackage{xcolor}
+%\usepackage{xcolor}
+\usepackage[table]{xcolor}
+\usepackage{colortbl}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
+\definecolor{Gray}{gray}{0.85}
 \newcommand{\taskprefix}{CH}
 \newcommand{\tasksize}{\normalsize}
 \newenvironment{taskenv}[1]{\begin{list}{{\tasksize\sc \theenumi.}}{\usecounter{enumi}
@@ -209,7 +213,7 @@ supporting the classes of applications described above. These have been
 uncovered via extensive experiments and in some cases include direct
 feedback from the developers of Android and iOS.
 %
-\subsection{Operating system constraints}
+\subsection{Operating system restrictions}
 \label{ch:os}
 %
 Due to \ref{c:2}, even when a user is not interacting with an app, or
@@ -225,7 +229,6 @@ these challenges and take the approach of having special access on the
 devices, e.g., jail-breaking or rooting
 \cite{gardner-stephen-serval-2011}. Clearly, such an approach does not
 scale to mass adoption.\\
-%
 %
 \subsection{Power constraints}
 \label{ch:power}
@@ -327,81 +330,20 @@ on both Android and iOS are the only protocols that were found
 effective. Actual techniques for discovery, advertisement, and
 connection vary across these protocols and are described next.
 %
-\subsection{Addressing the challenges}
-\label{sec:address}
+\subsection{Operating system restrictions}
+\label{sec:os}
+MNA works around the background activity and user permission
+restrictions via innovative techniques, without resorting to hacks
+that may violate user security or App-store guidelines.
+Tables~\ref{tab:android} and~\ref{tab:ios} summarize the various
+protocols we have experimented with using WiFi and Bluetooth
+interfaces, along with key findings as described here.  The protocols
+actually deployed are in bold.
 %
-\noindent\textbf{Operating system constraints} MNA addresses these
-challenges via innovative techniques, without resorting to hacks that
-may violate user security or App-store guidelines. DNS service
-discovery is a widely supported protocol for all platforms
-\cite{cheshire-dns-sd-2013}. 
-
-On Android, WiFi DNS improvises on this standard such that the
-exchange of information happens without making network connections at
-all. This is achieved by splitting the message payloads into small
-enough chunks and stuffing them into service advertisements as txt
-records and broadcast over multiple advertisements in a quick
-succession. Also, we employ foreground services to keep the discovery
-and advertisements active indefinitely.
-
-On iOS, the only protocol that stays reliably active in background
-without violating iOS developer guidelines is BTLE. Unlike Android,
-iOS applications do not need to request discovery and advertisements
-contunually. Once a BTLE Peripheral (role that has information) is
-advertised and a Central (role that receives information) requests
-discovery, the app is allowed to go to sleep. When a matching central
-or a peripheral device is found, iOS wakes up the application app to
-handle such an event, even when the application is in the
-background. MNA builds on this and leverages acynchronous dispatch
-queues to turn each peer into a Central as well as a Peripheral
-simultaneously. This architecture allows bidirectional data transfers
-without concurrency issues.
-
-\noindent\textbf{Power constraints} Due to indefinite forground
-services and continuous discovery and advertisement, this is primarily
-an issue on Android. Our approach here is two-pronged. Firstly, via
-extensive experiments on a large number of devices, we fine-tune the
-algorithms governing the intervals at which discovery and
-advertisements occur. In a nutshell, receiving new information during
-a period causes MNA to be more aggressive in discovery and
-advertisement. Similarly, lack of new information for a period makes
-the device less aggressive. Secondly, we allow ``wake up'' messages to
-be broadcast in the network ahead of an anticipated severe weather
-event. When devices receive such messages, they schedule themselves to
-remain aggressive during the specified window of time. Outside of this
-window, the device can afford to have long sleep cycles and conserve
-power. With these techniques, our testing shows less than 2\% battery
-consumption per hour on most device models.
-
-\noindent\textbf{Testing p2p networks}
-We developed test automation tools and processes such that multiple
-devices can be controlled from a single test station and follow
-prescribed steps to generate, send, and receives messages to play out
-a test scenario. Finally, the framework allows automated analysis of
-the observations to determine the test result. This capability was
-instrumental in uncovering bugs at a fast pace to meet the aggressive
-timeline and avoid the cost of acquisition. Further, the automation
-framework is general and can be expressly applied to test other apps
-in this fashion.
-
-
-\noindent\textbf{Trust in information} In our approach, since the
-origin of weather information is the Weather Channel service, digital
-signatures can be attached to all weather alerts broadcast from the
-service. The mobile application is distributed with the corresponding
-public key so that digital signatures from the service can be
-verified. If a message fails such a verification, it is discarded and
-not forwarded any further.
-
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=\columnwidth]{figs/android_ios}}
-\caption{Interoperability matrix between Android and iOS devices over BTLE}
-\label{fig:android_ios}
-\end{figure}
-
-
+%
 \begin{table}[H]
-\caption{Android protocols and range results}
+\caption{Android protocols and key findings}
+\label{tab:android}
 \centering
 \begin{tabular}{|c|l|r|r|r|c|l|}
 \hline
@@ -418,36 +360,189 @@ not forwarded any further.
 \hline
 \end{tabular}
 \end{table}
-
-
+%
+%
 \begin{table}[H]
-\caption{iOS protocols and range results}
+\caption{iOS protocols and key findings}
+\label{tab:ios}
 \centering
 \begin{tabular}{|c|l|r|r|r|c|l|}
 \hline
 & \multicolumn{1}{c|}{Protocol} & \multicolumn{1}{c|}{Throughput} & \multicolumn{1}{c|}{Battery} & \multicolumn{1}{c|}{Range} & \multicolumn{1}{c|}{Android} & \multicolumn{1}{c|}{Issues}\\
 &                               & \multicolumn{1}{c|}{Avg. kbps}  & \multicolumn{1}{c|}{per hour} & \multicolumn{1}{c|}{LoS ft} &                  &                            \\
 \hline
-\parbox[t]{2mm}{\multirow{3}{*}{\rotatebox[origin=c]{90}{WiFi}}} & Bonjour & 0.2 & 5\% & 200 & No & Battery\\
+\parbox[t]{2mm}{\multirow{2}{*}{\rotatebox[origin=c]{90}{WiFi}}} & Bonjour & 0.2 & 5\% & 200 & No & Battery\\
 & MPC & 2000 & 5\% & 200 & No & Battery\\
-& WiDi & 2000 & 5\% & 200 & No & Battery\\
 \hline
-& \textbf{BTLE} & 50 & 2\% & 800 & Yes & \\
+& \textbf{BTLE} & 50 & 1\% & 800 & Yes & \\
 \hline
 \end{tabular}
 \end{table}
-
-
 %
-\subsection{Automated test framework}
-\label{sec:test}
+
+Line of sight range in feet was measured by manually placing devices
+at increasing distances until they fail to communicate. Battery
+consumption per hour was measured as a difference between baseline
+battery consumption and when MNA was left running for 12
+hours. Reported numbers are an average percentage consumption across
+about 50 devices on each platform.
+
+BTLE is the only cross-platform protocol, although there are
+limitations with operating system versions as shown in
+Table~\ref{tab:android_ios}. Android is denoted as A, 18 and 21 are
+correspond to Android versions 4.3 and 5.0 respectively, and C and P
+denote the roles of Central and Peripheral. Key finding is that
+Android 4.3 devices acting as Peripheral cannot communicate either as
+senders or receivers.
 %
+\begin{table}[H]
+\caption{BTLE interoperability between Android and iOS devices}
+\label{tab:android_ios}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline 
+\multicolumn{1}{|c|}{Sender} & \multicolumn{6}{c|}{Receiver} \\
+\hline
+\multicolumn{1}{|c|}{} & A.18-C & A.18-P & A.21-C & A.21-P  & iOS-C & iOS-P \\
+\hline
+A.18-C & \cellcolor{Gray}         &   No       & \cellcolor{Gray}         &    Yes       &  \cellcolor{Gray}       &   Yes      \\ 
+\hline
+A.18-P &  No        & \cellcolor{Gray}         &   No       &  \cellcolor{Gray}         &   No      &  \cellcolor{Gray}       \\ 
+\hline
+A.21-C & \cellcolor{Gray}         &   No       &  \cellcolor{Gray}        &    Yes       &  \cellcolor{Gray}       &   Yes      \\ 
+\hline
+A.21-P &  Yes        & \cellcolor{Gray}         &   Yes       &  \cellcolor{Gray}         &   Yes      & \cellcolor{Gray}        \\ 
+\hline
+iOS-C & \cellcolor{Gray}         &    No      &  \cellcolor{Gray}        &     Yes       & \cellcolor{Gray}        &   Yes      \\ 
+\hline
+iOS-P &   Yes       & \cellcolor{Gray}         &    Yes      &  \cellcolor{Gray}         &   Yes      &  \cellcolor{Gray}       \\ 
+\hline
+\end{tabular}
+\end{table}
+%
+
+WiFi Direct (WiDi) is a clever combination of Hotspot with WiFi DNS
+wherein peers randomly choose to be a Hotspot or a client, discover
+WiFi credentials over WiFi DNS discovery and make WiFi connection to
+Hotspot without needing user permission.  However, both Hotspot and
+WiDi suffer from higher battery consumption than DNS and hence were
+not deployed. All Android protocols leverage foreground services to
+continue discovery and advertisement operations in the background
+indefinitely. Deployed protocols (WiFi DNS, BT Nearby, and BTLE) are
+described in detail in the following.
+
+\noindent\textbf{WiFi DNS} DNS service discovery is a widely supported
+protocol \cite{cheshire-dns-sd-2013}. On Android, WiFi DNS improvises
+on this standard such that the exchange of information happens without
+making network connections at all. This is achieved by splitting the
+message payloads into small enough chunks and stuffing them into
+service advertisements as txt records and broadcast over multiple
+advertisements in a quick succession. Since there are no connections
+being made, the messages can be exchanged without prompting the user
+to grant permissions for each connection. Since no peer connections
+are needed and advertisements and discovery are broadcast, WiFi DNS is
+a broadcast protocol. On iOS, Bonjour protocol is built on DNS service
+discovery but is power-hungry and does not interoperate with WiFi DNS
+on Android. Algorithm~\ref{algo:dns} outlines the peer process for
+WiFi DNS.
+
+\begin{algorithm}[h]
+\label{algo:dns}
+\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\SetAlgoLined
+\KwIn{Peer id $p_{id}$, advert/discovery intervals $T_{ad}$, $T_{disc}$}
+ $S_{name} \gets$ \textsf{'MNA'}\;
+ $\mathbb{M} \gets \varnothing$\;
+ \ForEach{timer expiry $T_{ad}$}{
+   $\mathbb{M} \gets \mathbb{M} -$ expired messages\;
+   $\mathbb{M}_{sort} \gets$ $\mathbb{M}$ sorted by least advertised first\;
+   $B \gets$ $\mathbb{M}_{sort}$ chunked by MTU size\;
+   dnsAdvertise ($S_{name}$, $B$)\;
+ }
+ \ForEach{timer expiry $T_{disc}$}{
+   dnsDiscover ($S_{name}$)\;
+ }
+ \ForEach{discovered service callback $S_{disc}$}{
+   $B \gets S_{disc}.B$\;
+   $M_{part} \gets msg(B)$\;
+   $M \gets M + M_{part}$\; 
+   \If{$M_{part}$ was the last chunk of $M$}{
+     \If{$M$ is unexpired $\wedge$ $M$ has valid signature}{
+       $\mathbb{M} \gets \mathbb{M} \cup M$\;
+     }
+   }
+ }
+ \tcc{For testing only}
+ \ForEach{app request to send $M$}{
+   \If{$M$ has not expired}{
+     $\mathbb{M} \gets \mathbb{M} \cup M$\;
+   }
+ }
+ \caption{WiFi DNS peer algorithm}
+\end{algorithm}
+
+\noindent\textbf{BTLE} The only protocol that stays reliably active in
+background without violating iOS developer guidelines is BTLE. Unlike
+Android, iOS applications do not need to request discovery and
+advertisements contunually. Once a BTLE Peripheral (role that has
+information) is advertised and a Central (role that receives
+information) requests discovery, the app is allowed to go to
+sleep. When a matching central or a peripheral device is found, iOS
+wakes up the application app to handle such an event, even when the
+application is in the background. MNA builds on this and leverages
+acynchronous dispatch queues to turn each peer into a Central as well
+as a Peripheral simultaneously. This architecture allows bidirectional
+data transfers without concurrency issues.
+%
+\subsection{Power constraints}
+\label{sec:power}
+%
+Due to indefinite forground services and continuous discovery and
+advertisement, this is primarily an issue on Android. Our approach
+here is two-pronged. Firstly, via extensive experiments on a large
+number of devices, we fine-tune the algorithms governing the intervals
+at which discovery and advertisements occur. In a nutshell, receiving
+new information during a period causes MNA to be more aggressive in
+discovery and advertisement. Similarly, lack of new information for a
+period makes the device less aggressive. Secondly, we allow ``wake
+up'' messages to be broadcast in the network ahead of an anticipated
+severe weather event. When devices receive such messages, they
+schedule themselves to remain aggressive during the specified window
+of time. Outside of this window, the device can afford to have long
+sleep cycles and conserve power. With these techniques, our testing
+shows less than 2\% battery consumption per hour on most device
+models.
+%
+\subsection{Testing p2p networks}
+\label{sec:texting}
+%
+We developed test automation tools and processes such that multiple
+devices can be controlled from a single test station and follow
+prescribed steps to generate, send, and receives messages to play out
+a test scenario. Finally, the framework allows automated analysis of
+the observations to determine the test result. This capability was
+instrumental in uncovering bugs at a fast pace to meet the aggressive
+timeline and avoid the cost of acquisition. Further, the automation
+framework is general and can be expressly applied to test other apps
+in this fashion.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{figs/test_arch}}
 \caption{Automated testing system for MNA}
 \label{fig:test_arch}
 \end{figure}
+
+%
+\subsection{Trust in information}
+\label{sec:trust}
+%
+In our approach, since the origin of weather information is the
+Weather Channel service, digital signatures can be attached to all
+weather alerts broadcast from the service. The mobile application is
+distributed with the corresponding public key so that digital
+signatures from the service can be verified. If a message fails such a
+verification, it is discarded and not forwarded any further.
+
 
 %
 \section{Experimental Results}

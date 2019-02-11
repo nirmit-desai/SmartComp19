@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  10 FEB 2019 20:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  10 FEB 2019 23:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -243,20 +243,63 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks23
 \@floatcapt=\box31
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/algorithms/algorithmic.sty
-Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+(/usr/local/texlive/2017/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+Package: algorithm2e 2013/01/06 v5.00 algorithms environments
+\c@AlgoLine=\count109
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\c@ALC@unique=\count109
-\c@ALC@line=\count110
-\c@ALC@rem=\count111
-\c@ALC@depth=\count112
-\ALC@tlm=\skip51
-\algorithmicindent=\skip52
+\algocf@hangindent=\skip51
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/base/textcomp.sty
+(/usr/local/texlive/2017/texmf-dist/tex/latex/relsize/relsize.sty
+Package: relsize 2013/03/29 ver 4.1
+)
+********************************************************
+Package `algorithm2e' Release 5.1 -- october 19 2015 --
+- algorithm2e-announce@lirmm.fr mailing list for announcement about releases
+- algorithm2e-discussion@lirmm.fr mailing list for discussion about package
+subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
+- Author: Christophe Fiorio (christophe.fiorio@umontpellier.fr)
+********************************************************
+\skiptotal=\skip52
+\skiplinenumber=\skip53
+\skiprule=\skip54
+\skiphlne=\skip55
+\skiptext=\skip56
+\skiplength=\skip57
+\algomargin=\skip58
+\skipalgocfslide=\skip59
+\algowidth=\dimen140
+\inoutsize=\dimen141
+\inoutindent=\dimen142
+\interspacetitleruled=\dimen143
+\interspacealgoruled=\dimen144
+\interspacetitleboxruled=\dimen145
+\algocf@ruledwidth=\skip60
+\algocf@inoutbox=\box32
+\algocf@inputbox=\box33
+\AlCapSkip=\skip61
+\AlCapHSkip=\skip62
+\algoskipindent=\skip63
+\algocf@nlbox=\box34
+\algocf@hangingbox=\box35
+\algocf@untilbox=\box36
+\algocf@skipuntil=\skip64
+\algocf@capbox=\box37
+\algoheightruledefault=\skip65
+\algoheightrule=\skip66
+\algotitleheightruledefault=\skip67
+\algotitleheightrule=\skip68
+\c@algocfline=\count110
+\c@algocfproc=\count111
+\c@algocf=\count112
+\algocf@algoframe=\box38
+\algocf@algobox=\box39
+) (/usr/local/texlive/2017/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2017/04/05 v2.0i Standard LaTeX package
 Package textcomp Info: Sub-encoding information:
 (textcomp)               5 = only ISO-Adobe without \textcurrency
@@ -345,6 +388,13 @@ Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
+\everycr=\toks24
+\minrowclearance=\skip69
+)
+\rownum=\count113
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
 Package xcolor Info: Model `RGB' extended on input line 1364.
@@ -355,44 +405,44 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
-\c@task=\count113
+\c@task=\count114
 
 (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 30.
  (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    ... okay on input line 30.
 
 -- Lines per column: 56 (exact).
 (/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count114
-\scratchdimen=\dimen140
-\scratchbox=\box32
-\nofMPsegments=\count115
-\nofMParguments=\count116
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count117
-\MPscratchDim=\dimen141
-\MPnumerator=\count118
-\makeMPintoPDFobject=\count119
-\everyMPtoPDFconversion=\toks25
+\scratchcounter=\count115
+\scratchdimen=\dimen146
+\scratchbox=\box40
+\nofMPsegments=\count116
+\nofMParguments=\count117
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count118
+\MPscratchDim=\dimen147
+\MPnumerator=\count119
+\makeMPintoPDFobject=\count120
+\everyMPtoPDFconversion=\toks26
 ) (/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -442,24 +492,24 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 73.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 77.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 73.
-LaTeX Font Info:    Try loading font information for U+msa on input line 99.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 77.
+LaTeX Font Info:    Try loading font information for U+msa on input line 103.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 99.
+LaTeX Font Info:    Try loading font information for U+msb on input line 103.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 99--99
+Underfull \hbox (badness 10000) in paragraph at lines 103--103
 [][][]\OT1/ptm/m/n/8 https://www.statista.com/statistics/330695/number-of-smart
 phone-users-
  []
@@ -468,95 +518,97 @@ phone-users-
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 215--230
+Underfull \hbox (badness 10000) in paragraph at lines 219--233
 
  []
 
 <figs/arch.pdf, id=12, 883.3pt x 417.56pt>
 File: figs/arch.pdf Graphic file (type pdf)
  <use figs/arch.pdf>
-Package pdftex.def Info: figs/arch.pdf used on input line 281.
+Package pdftex.def Info: figs/arch.pdf used on input line 284.
 (pdftex.def)             Requested size: 252.0pt x 119.12688pt.
  [2]
-<figs/android_ios.pdf, id=18, 1073.00874pt x 362.35374pt>
-File: figs/android_ios.pdf Graphic file (type pdf)
-
-<use figs/android_ios.pdf>
-Package pdftex.def Info: figs/android_ios.pdf used on input line 397.
-(pdftex.def)             Requested size: 252.0pt x 85.09784pt.
-
-Overfull \hbox (5.72153pt too wide) in paragraph at lines 406--420
+Overfull \hbox (5.72151pt too wide) in paragraph at lines 348--362
  [][] 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [3 <./figs/arch.pdf>]
-Overfull \hbox (4.69746pt too wide) in paragraph at lines 426--438
+Overfull \hbox (4.69745pt too wide) in paragraph at lines 369--380
  [][] 
  []
 
-<figs/test_arch.pdf, id=32, 1138.2525pt x 596.2275pt>
+[3 <./figs/arch.pdf>]
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 454.
+
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 475.
+
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+<figs/test_arch.pdf, id=31, 1138.2525pt x 596.2275pt>
 File: figs/test_arch.pdf Graphic file (type pdf)
  <use figs/test_arch.pdf>
-Package pdftex.def Info: figs/test_arch.pdf used on input line 447.
+Package pdftex.def Info: figs/test_arch.pdf used on input line 530.
 (pdftex.def)             Requested size: 252.0pt x 131.99834pt.
 
-<figs/romania_latency.pdf, id=33, 900.36375pt x 540.0175pt>
+<figs/romania_latency.pdf, id=32, 900.36375pt x 540.0175pt>
 File: figs/romania_latency.pdf Graphic file (type pdf)
 
 <use figs/romania_latency.pdf>
-Package pdftex.def Info: figs/romania_latency.pdf used on input line 466.
+Package pdftex.def Info: figs/romania_latency.pdf used on input line 561.
 (pdftex.def)             Requested size: 252.0pt x 151.13794pt.
 
-<figs/romania_activity.pdf, id=34, 1122.1925pt x 494.84875pt>
+<figs/romania_activity.pdf, id=33, 1122.1925pt x 494.84875pt>
 File: figs/romania_activity.pdf Graphic file (type pdf)
 
 <use figs/romania_activity.pdf>
-Package pdftex.def Info: figs/romania_activity.pdf used on input line 472.
+Package pdftex.def Info: figs/romania_activity.pdf used on input line 567.
 (pdftex.def)             Requested size: 252.0pt x 111.11719pt.
-
-<figs/variety_e2e_latency.pdf, id=35, 523.9575pt x 299.1175pt>
+ [4 <./figs/test_arch.pdf>]
+<figs/variety_e2e_latency.pdf, id=52, 523.9575pt x 299.1175pt>
 File: figs/variety_e2e_latency.pdf Graphic file (type pdf)
 
 <use figs/variety_e2e_latency.pdf>
-Package pdftex.def Info: figs/variety_e2e_latency.pdf used on input line 496.
+Package pdftex.def Info: figs/variety_e2e_latency.pdf used on input line 591.
 (pdftex.def)             Requested size: 252.0pt x 143.8623pt.
 
-<figs/variety_hops.png, id=36, 524.96124pt x 298.11375pt>
+<figs/variety_hops.png, id=53, 524.96124pt x 298.11375pt>
 File: figs/variety_hops.png Graphic file (type png)
 
 <use figs/variety_hops.png>
-Package pdftex.def Info: figs/variety_hops.png used on input line 503.
+Package pdftex.def Info: figs/variety_hops.png used on input line 598.
 (pdftex.def)             Requested size: 252.0pt x 143.10661pt.
 
-<figs/e2e_latency.pdf, id=38, 517.935pt x 293.095pt>
+<figs/e2e_latency.pdf, id=55, 517.935pt x 293.095pt>
 File: figs/e2e_latency.pdf Graphic file (type pdf)
 
 <use figs/e2e_latency.pdf>
-Package pdftex.def Info: figs/e2e_latency.pdf used on input line 511.
+Package pdftex.def Info: figs/e2e_latency.pdf used on input line 606.
 (pdftex.def)             Requested size: 252.0pt x 142.60706pt.
 
-<figs/duplicates.pdf, id=39, 518.93875pt x 292.09125pt>
+<figs/duplicates.pdf, id=56, 518.93875pt x 292.09125pt>
 File: figs/duplicates.pdf Graphic file (type pdf)
 
 <use figs/duplicates.pdf>
-Package pdftex.def Info: figs/duplicates.pdf used on input line 518.
+Package pdftex.def Info: figs/duplicates.pdf used on input line 613.
 (pdftex.def)             Requested size: 252.0pt x 141.84235pt.
- <figs/hops.pdf, id=40, 518.93875pt x 288.07625pt>
+ <figs/hops.pdf, id=57, 518.93875pt x 288.07625pt>
 File: figs/hops.pdf Graphic file (type pdf)
 
 <use figs/hops.pdf>
-Package pdftex.def Info: figs/hops.pdf used on input line 524.
+Package pdftex.def Info: figs/hops.pdf used on input line 619.
 (pdftex.def)             Requested size: 252.0pt x 139.89262pt.
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
- [4 <./figs/android_ios.pdf> <./figs/test_arch.pdf> <./figs/romania_latency.pdf
-> <./figs/romania_activity.pdf> <./figs/variety_e2e_latency.pdf>] (./paper.bbl 
-[5 <./figs/variety_hops.png> <./figs/e2e_latency.pdf> <./figs/duplicates.pdf> <
-./figs/hops.pdf>])
+ [5 <./figs/romania_latency.pdf> <./figs/romania_activity.pdf> <./figs/variety_
+e2e_latency.pdf> <./figs/variety_hops.png> <./figs/e2e_latency.pdf>] (./paper.b
+bl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -568,30 +620,37 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[6
+[6 <./figs/duplicates.pdf> <./figs/hops.pdf>] (./paper.aux) )
+(\end occurred inside a group at level 1)
 
-] (./paper.aux) ) 
+### simple group (level 1) entered at line 1061 ({)
+### bottom level 
 Here is how much of TeX's memory you used:
- 4673 strings out of 492995
- 68302 string characters out of 6132704
- 143654 words of memory out of 5000000
- 8131 multiletter control sequences out of 15000+600000
- 45543 words of font info for 90 fonts, out of 8000000 for 9000
+ 5624 strings out of 492995
+ 83639 string characters out of 6132704
+ 172284 words of memory out of 5000000
+ 9064 multiletter control sequences out of 15000+600000
+ 47818 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,13n,35p,233b,312s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.en
-c}</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></u
-sr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
-r/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
-local/texlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texl
-ive/2017/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2017/
-texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist
-/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (6 pages, 3838662 bytes).
+ 41i,17n,35p,302b,3039s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc
+}</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></
+usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
+r/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/l
+ocal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
+cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/loca
+l/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/
+local/texlive/2017/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/te
+xlive/2017/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2
+017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-
+dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2017/texmf-dist/font
+s/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/ur
+w/times/utmri8a.pfb>
+Output written on paper.pdf (6 pages, 3534776 bytes).
 PDF statistics:
- 159 PDF objects out of 1000 (max. 8388607)
- 103 compressed objects within 2 object streams
+ 168 PDF objects out of 1000 (max. 8388607)
+ 111 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
