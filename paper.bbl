@@ -11,6 +11,13 @@ R.~Bruno, M.~Conti, and E.~Gregori.
 \newblock Mesh networks: commodity multihop ad hoc networks.
 \newblock {\em IEEE Communications Magazine}, 43(3):123--131, March 2005.
 
+\bibitem{chavoutier-2007}
+V.~Chavoutier, D.~Maniezzo, C.~E. Palazzi, and M.~Gerla.
+\newblock Multimedia over wireless mesh networks : Results from a real testbed
+  evaluation.
+\newblock In {\em Sixth Annual Mediterranean Ad Hoc Networking WorkShop}, pages
+  56--62, June 2007.
+
 \bibitem{cheshire-dns-sd-2013}
 S.~Cheshire and R.~Krochmal.
 \newblock Dns-based service discovery.
@@ -27,6 +34,10 @@ P.~Gardner-Stephen and S.~Palaniswamy.
 \newblock In {\em Proceedings of the 1st International Conference on Wireless
   Technologies for Humanitarian Relief}, ACWR '11, pages 71--77, New York, NY,
   USA, 2011. ACM.
+
+\bibitem{gatech-mesh}
+{Georgia Tech.}
+\newblock http://bwn.ece.gatech.edu/mesh/.
 
 \bibitem{mna}
 {IBM}.
@@ -60,6 +71,11 @@ M.~Mauve, J.~Widmer, and H.~Hartenstein.
 \newblock A survey on position-based routing in mobile ad hoc networks.
 \newblock {\em IEEE Network}, 15(6):30--39, Nov 2001.
 
+\bibitem{microsoft-mesh}
+{Microsoft Inc.}
+\newblock
+  https://www.microsoft.com/en-us/research/project/self-organizing-wireless-mesh-networks.
+
 \bibitem{emane}
 {Naval Research Laboratory}.
 \newblock Extendable mobile ad-hoc network emulator (emane).
@@ -79,6 +95,19 @@ C.~E. Perkins.
 \newblock In {\em Ad Hoc Networking}, chapter Ad Hoc Networking: An
   Introduction, pages 1--28. Addison-Wesley Longman Publishing Co., Inc.,
   Boston, MA, USA, 2001.
+
+\bibitem{saha-mesh-2014}
+S.~Saha, U.~Kumar~Acharjee, and M.~Tahzib-Ul-Islam.
+\newblock A survey on wireless mesh network and its challenges at the transport
+  layer.
+\newblock {\em International Journal of Computer Engineering and Technology
+  (IJCET)}, 5:169--177, 08 2014.
+
+\bibitem{wu-mesh-2010}
+Y.~Wu, D.~Sun, P.~Yi, and J.~Tang.
+\newblock Design and implementation of wireless mesh network testbed sjtu-mesh.
+\newblock In {\em 2010 International Conference on Internet Technology and
+  Applications}, pages 1--4, Aug 2010.
 
 \bibitem{zhang-topology-manet-2015}
 X.~M. Zhang, Y.~Zhang, F.~Yan, and A.~V. Vasilakos.

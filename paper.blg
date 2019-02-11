@@ -3,55 +3,61 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: paper.aux
 The style file: abbrv.bst
 Database file #1: smartcomp19.bib
+Warning--empty title in gatech-mesh
+Warning--empty journal in gatech-mesh
+Warning--empty year in gatech-mesh
 Warning--empty journal in mna
 Warning--empty year in mna
 Warning--empty journal in mna-test-demo
 Warning--empty year in mna-test-demo
+Warning--empty title in microsoft-mesh
+Warning--empty journal in microsoft-mesh
+Warning--empty year in microsoft-mesh
 Warning--empty journal in emane
 Warning--empty year in emane
 Warning--empty title in firechat
 Warning--empty journal in firechat
 Warning--empty year in firechat
 Warning--empty title in perkins-ad-hoc-2001
-You've used 16 entries,
+You've used 21 entries,
             2118 wiz_defined-function locations,
-            594 strings with 6081 characters,
-and the built_in function-call counts, 5090 in all, are:
-= -- 492
-> -- 228
-< -- 5
-+ -- 92
-- -- 74
-* -- 358
-:= -- 854
-add.period$ -- 49
-call.type$ -- 16
-change.case$ -- 83
+            619 strings with 6914 characters,
+and the built_in function-call counts, 6745 in all, are:
+= -- 641
+> -- 306
+< -- 7
++ -- 124
+- -- 100
+* -- 477
+:= -- 1121
+add.period$ -- 62
+call.type$ -- 21
+change.case$ -- 109
 chr.to.int$ -- 0
-cite$ -- 26
-duplicate$ -- 210
-empty$ -- 398
-format.name$ -- 74
-if$ -- 1067
+cite$ -- 37
+duplicate$ -- 281
+empty$ -- 531
+format.name$ -- 100
+if$ -- 1417
 int.to.chr$ -- 0
-int.to.str$ -- 16
-missing$ -- 17
-newline$ -- 81
-num.names$ -- 32
-pop$ -- 100
+int.to.str$ -- 21
+missing$ -- 22
+newline$ -- 104
+num.names$ -- 42
+pop$ -- 142
 preamble$ -- 1
-purify$ -- 69
+purify$ -- 92
 quote$ -- 0
-skip$ -- 141
+skip$ -- 189
 stack$ -- 0
-substring$ -- 253
-swap$ -- 40
-text.length$ -- 5
+substring$ -- 332
+swap$ -- 57
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 62
-warning$ -- 10
-while$ -- 47
-width$ -- 18
-write$ -- 172
-(There were 10 warnings)
+type$ -- 82
+warning$ -- 16
+while$ -- 62
+width$ -- 23
+write$ -- 219
+(There were 16 warnings)

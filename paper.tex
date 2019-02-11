@@ -107,7 +107,7 @@ potential for new applications
 p2p networks has focused on analytical and simulation-based study of
 MANET behavior
 \cite{zhang-topology-manet-2015,marti-misbehavior-manet-2000,mauve-pos-routing-manet-2001}. Given
-the outstanding practical challenges in deployoing a large number of
+the outstanding practical challenges in deploying a large number of
 physical nodes, real-world implementations have been limited and have
 not reached mass scale \cite{kiess-manet-impl-2007}. However, with the
 growth of smartphones, large-scale real-world implementations may
@@ -155,7 +155,7 @@ nodes for a large-scale deployment has been another theme in the prior
 works, e.g., the Serval project
 \cite{gardner-stephen-serval-2011}. Serval mesh enables p2p
 communication over on-device WiFi radio, but requires root access to
-the device via jailbreaking. Although significant leassons have been
+the device via jail-breaking. Although significant lessons have been
 learned through these attempts, a mass-scale p2p network for such
 applications remains elusive.
 
@@ -217,7 +217,7 @@ feedback from the developers of Android and iOS.
 %
 Due to \ref{c:2}, even when a user is not interacting with an app, or
 worse yet, when the device is not being used at all, the devices must
-continue to discover peer devices to receive and formward
+continue to discover peer devices to receive and forward
 information. Although modern mobile operating systems such as Android
 and iOS offer APIs to discover and advertise information to peer
 devices over WiFi and Bluetooth interfaces, peer-to-peer connections
@@ -256,14 +256,14 @@ communications and they are unpredictable (\ref{c:1}), it is important
 to run test cases under various mobility patterns across all nodes in
 the network.  Emulated mobility frameworks such as CORE
 \cite{arenholz-core-2008} and EMANE \cite{emane} fall short as the
-connection latencies and wireless transmission are specific to device
+connection latency and wireless transmission are specific to device
 model and radio.  This is not a challenge in traditional mobile
 application development as the application functionality is confined
 within a single connected device.
 %
 \subsection{Trust in information}
 %
-As user devices with MNA advertise on unsecure wireless protocols, it
+As user devices with MNA advertise on unsecured wireless protocols, it
 may be possible for a malicious attacker to listen for such
 advertisements and reverse-engineer the message formats and protocols
 used. Then, the attackers may generate fake messages and advertise
@@ -294,7 +294,7 @@ assigns it a unique identifier. Next, the central service produces a
 digital signature using its private key and appends it to the message
 payload. Finally, header parameters specifying TTL (duration after
 which the message expires), peer identifier of the central service,
-destination peer identifier list (for unicast) or a special identifier
+destination peer identifier list (for uni-cast) or a special identifier
 (for broadcast), and the time of origin are added to the message and
 the message is sent to a push notification service for distribution.
 
@@ -304,7 +304,7 @@ connectivity receive the push messages and verify the digital
 signature to protect against spread of misinformation.  If the message
 has not expired and is destined to other peers, then the receiving
 peers start forwarding the message to other peers. Depending on the
-protocol being used, such forwarding happens as a unicast or
+protocol being used, such forwarding happens as a uni-cast or
 broadcast.
 
 Since new information can arrive at any time or new peers may come
@@ -324,7 +324,7 @@ The following assesses the c2p2p architecture relative to the
 challenges identified above along with known limitations. Further, to
 realize this architecture on mobile devices, we evaluated a variety of
 protocols on both Android and iOS. As described later, WiFi DNS on
-Android, Bluetooth Nearby on Android, and Blutooth low energy (BTLE)
+Android, Bluetooth Nearby on Android, and Bluetooth low energy (BTLE)
 on both Android and iOS are the only protocols that were found
 effective. Actual techniques for discovery, advertisement, and
 connection vary across these protocols and are described next.
@@ -434,7 +434,7 @@ in Section~\ref{sec:algo}.
 \subsection{Power constraints}
 \label{sec:power}
 %
-Due to indefinite forground services and continuous discovery and
+Due to indefinite foreground services and continuous discovery and
 advertisement, this is primarily an issue on Android. Our approach
 here is two-pronged. Firstly, via extensive experiments on a large
 number of devices, we fine-tune the algorithms governing the intervals
@@ -442,7 +442,7 @@ at which discovery and advertisements occur. In a nutshell, receiving
 new information during a period causes MNA to be more aggressive in
 discovery and advertisement. Similarly, lack of new information for a
 period makes the device less aggressive. Secondly, we allow the
-centrasl service to broadcast``wake up'' messages ahead of an
+central service to broadcast``wake up'' messages ahead of an
 anticipated severe weather event.  When devices receive such messages,
 they schedule themselves to remain aggressive during the specified
 window of time.  Outside of this window, the device can afford to have
@@ -458,11 +458,11 @@ multiple devices from a single test station and follow prescribed
 steps to generate, send, and receives messages to play out a test
 scenario.  The framework allows automated analysis of the observations
 to determine the test result. This capability was instrumental in
-uncovering bugs at a fast pace with tens of physical devices emloyed
+uncovering bugs at a fast pace with tens of physical devices employed
 for automated testing.  Further, the automation framework is general
 and can be expressly applied to test other apps in this fashion.
 
-Figure~\ref{fig:test_arch} shows the overall test automnation
+Figure~\ref{fig:test_arch} shows the overall test automation
 architecture. A tester specifies high-level test cases and expected
 results in a platform and device agnostic fashion. Mobile devices run
 a UI proxy for executing platform and device-specific UI command while
@@ -533,10 +533,10 @@ being made, the messages can be exchanged without prompting the user
 to grant permissions for each connection. Since no peer connections
 are needed and advertisements and discovery are broadcast, WiFi DNS is
 a broadcast protocol. On iOS, Bonjour protocol is built on DNS service
-discovery but is power-hungry and does not interoperate with WiFi DNS
+discovery but is power-hungry and does not inter-operate with WiFi DNS
 on Android. Algorithm~\ref{algo:dns} outlines the peer process for
 WiFi DNS. Power conservation via time intervals is achieved by
-manupulating $T_{ad}$ and $T_{disc}$ based on traffic. 
+manipulating $T_{ad}$ and $T_{disc}$ based on traffic. 
 
 Messages from multiple applications are forwarded on the same network,
 but a peer can validate signatures only for the messages targeting an
@@ -544,8 +544,8 @@ app it hosts. Peers simply forward messages not targeting one of their
 apps. Key benefit of this design is that the density of peers is
 available to all apps, making c2p2p scenarios viable even when an
 individual app does not have a sufficient density of users.  However,
-this also allows a malicioous jammer to generate traffic for a fake
-app and force the peers to forwad it (as they do not match any of the
+this also allows a malicious jammer to generate traffic for a fake
+app and force the peers to forward it (as they do not match any of the
 apps) until the messages expire.  Although the fake information will
 never be delivered to the apps, this issue can affect MNA throughput
 for legitimate apps. A possible solution would be to maintain a
@@ -613,13 +613,13 @@ apps.
 The only protocol that stays reliably active in
 background without violating iOS developer guidelines is BTLE. Unlike
 Android, iOS applications do not need to request discovery and
-advertisements contunually. Once a BTLE Peripheral (role that has
+advertisements continually. Once a BTLE Peripheral (role that has
 information) is advertised and a Central (role that receives
 information) requests discovery, the app is allowed to go to
 sleep. When a matching central or a peripheral device is found, iOS
 wakes up the application app to handle such an event, even when the
 application is in the background. MNA builds on this and leverages
-acynchronous dispatch queues to turn each peer into a Central as well
+asynchronous dispatch queues to turn each peer into a Central as well
 as a Peripheral simultaneously. This architecture allows bidirectional
 data transfers without concurrency issues.
 
@@ -695,113 +695,245 @@ $max_p$.
  \caption{BTLE peer algorithm}
 \end{algorithm}
 
-
+%
 \section{Experimental Results}
 \label{sec:eval}
 %
-
+Although MNA is deployed to about $10$ million users, collecting a
+significant amount of data runs into privacy and scale issues. Also,
+given the challenges associated with tests involving a large number of
+physical devices along with human mobility patterns, we employ a
+three-pronged approach to evaluation: (1) Limited metrics from the MNA
+user population, (2) recruit human volunteers (colleagues at IBM) in a
+pilot to have the app on their personal devices and run tests in the
+background, and (3) use the automated test environment to run
+controlled experiments. All experiments mentioning WiFi are on the
+WiFi DNS channel and BT is Bluetooth classic.
 %
-
+\subsection{MNA limited experiment}
+\label{sec:mna}
 %
-
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{figs/mna}}
+\caption{Messages received over mesh in one week}
+\label{fig:mna}
+\end{figure}
+%
+As Figure~\ref{fig:mna} shows, measures of number of messages received
+first via MNA and the number of unique users was collected during a week in
+June 2018. Almost no MNA messages were received with a roll-out to
+$10\%$ of the users.  This makes sense given that p2p needs critical
+density of users to propagate messages over large distances.  With
+$100\%$ of the users participating, 6 million+ weather alerts were
+received first via MNA by 1.9 million+ users within the collection
+period. Even when the users are connected to the Internet, they
+may receive the alert via MNA before the push notification arrives via
+the Internet. Given that such a large population of users received it
+via MNA first implies that there is value in the c2p2p architecture
+even when Internet connectivity is available.
 %
 \subsection{Pilot test results}
 \label{sec:romania}
 %
+About 25 colleagues participated in a pilot on a site across two
+office buildings and about a thousand people in total.  Clearly, the
+user density in this case was low. The app installed on their personal
+devices sent a broadcast message of varying sizes every five minutes
+and statistics on MNA were collected. 
+
+Overall, about 13\% of the messages were received at least once
+(depends on density of users in the building) while users actively
+used the devices for ~5\% of the time.  Figure~\ref{fig:romania_lat}
+shows number of messages received and how the single-hop latency
+varies between WiFi DNS and BT Classic and across increasing packet
+sizes. Except for the 1000 byte+ packets, WiFi DNS achieved lower
+end-to-end latencies than BT Classic, perhaps due to its broadcast
+model and wide support across devices. This also explains why more
+messages were delivered over WiFi DNS than BT Classic. Packet sizes
+did not affect single-hop latencies on p2p DNS, perhaps because most
+of the messages fit within a single advertised chunk of up to 750
+bytes.
+
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{figs/romania_latency}}
-\caption{Latency results from a 25-user pilot}
+\caption{Latency as a function of packet sizes}
 \label{fig:romania_lat}
 \end{figure}
 
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=\columnwidth]{figs/romania_activity}}
-\caption{MNA activity during the pilot}
-\label{fig:romania_act}
-\end{figure}
-
-
-About 13\% of the messages were received at least once (depends on
-density of users in the building). Users actively used the devices for
-~5\% of the time p2p NSD achieved lower end-to-end latencies than BT
-Classic, perhaps due to its broadcast model and wide support across
-devices. Packet sizes did not affect single-hop latencies on p2p DNS,
-perhaps because most of the messages fit within single advert. Packet
-sizes did not affect single-hop latencies on BT Classic, perhaps
-because Bluetooth has a much higher bandwidth 2 out of 25 devices have
-their clocks set wrong (confusing latency results). More than 10\% of
-the messages were received in the last 5 min of message expiry,
-implying messages were discarded due to expirty, even when they did
-not reach all devices
+%\begin{figure}[htbp]
+%\centerline{\includegraphics[width=\columnwidth]{figs/romania_activity}}
+%\caption{MNA activity during the pilot}
+%\label{fig:romania_act}
+%\end{figure}
 
 %
 \subsection{Automated test results}
 \label{sec:automated}
 %
+We turn to the automated testing with up to 10 physical devices to
+carry out some controlled testing and a deeper understanding of how
+the various MNA protocols behave.
+%
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{figs/variety_e2e_latency}}
-\caption{Comparison of WiFi and Bluetooth interfaces in terms of
-  end-to-end latency}
+\caption{End-to-end latency, WiFi DNS vs. BT Classic}
 \label{fig:variety_e2e}
 \end{figure}
+%
+Figure~\ref{fig:variety_e2e} shows end-to-end latency results in a test
+involving three Android devices, each sending a variety of message and
+payload size configurations. Latency is shown on a logarithmic scale
+y-axis. Total load on network increases from left to right on
+x-axis while the number of messages is small for the first and third
+configurations and large for the second and fourth configuration. 
 
+As expected, WiFi DNS latency increases significantly with network
+load given its very low throughput. As BT Classic cannot broadcast, it
+spends significant time making connections with peers.  Hence, WiFi
+DNS beats BT Classic in the 30x67 configuration involving a large
+number of small messages. However, when the message sizes are
+increased as in 42x117 configuration, BT Classic is almost 10x faster
+than WiFi DNS due to superior
+throughput. Figure~\ref{fig:variety_hops} confirms this difference in
+network topology by measuring average hop counts. WiFi DNS always
+needs fewer hops to deliver messages than BT Classic.
+%
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{figs/variety_hops}}
-\caption{Comparison of WiFi and Bluetooth interfaces in terms of
-  network topology}
+\caption{Hop counts, WiFi DNS vs. BT Classic}
 \label{fig:variety_hops}
 \end{figure}
+%
 
+Next, we compare WiFi DNS and BT Nearby on Android with BTLE on iOS in
+terms of end-to-end latency as the payload size is increased as shown
+in Figure~\ref{fig:e2e}. The results were collected over three repeats
+of the experiment involving up to 10 android devices and 6 iOS
+devices. BTLE is almost 100x faster than WiFi DNS and BT Nearby. For
+Wifi DNS, as payload size approaches the max advertisement chunk size
+of 750 bytes, the end-to-end latency rises by almost 10x (100 bytes
+versus 720 bytes). Behavior of BT Nearby taking time to form
+connections but having a good throughput is evident as the end-to-end
+latency does not change even when payload sizes go up to 10KB. BTLE on
+the other hand gets 10x slower with 10KB payloads as compared to 1KB.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{figs/e2e_latency}}
-\caption{Comparison of WiFi and Bluetooth Nearby interfaces in terms
-  of end-to-end latency}
+\caption{End-to-end latency, WiFi DNS vs. BT Nearby vs. BTLE}
 \label{fig:e2e}
 \end{figure}
 
+As described above, MNA employs zero-overhead routing with the goal of
+maximizing coverage and minimizing latency across peers while
+tolerating topology changes.  As a result, messages may be delivered
+multiple times to the same peer as no control messages are sent to
+keep track of the peer state.  Figure~\ref{fig:dup} shows the cost of
+such an approach in terms of average number of duplicate messages
+received by peers across WiFi DNS, BT Nearby, and BTLE (iOS). 
+
+For small payload sizes, WiFi DNS ends up duplicating a large number
+of messages as the broadcasts are seen by many peers and repeated
+advertisements must go on to reach newly proximal peers. The
+duplicates drop significantly with payloads approaching the
+advertisement chunk size because the fraction of transmissions that
+are successfull also drops with large payloads (multiple chunks need
+to be delivered per message). The forward list in BT Nearby and BTLE
+help control the duplicates significantly.
+
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{figs/duplicates}}
-\caption{Duplicity due to flooding}
+\caption{Duplicity due to zero-overhead routing}
 \label{fig:dup}
 \end{figure}
 
+Lastly, Figure~\ref{fig:hop} shows the network toplogy underlying WiFi
+DNS, BT Nearby, and BTLE. As shown earlier in
+Figure~\ref{fig:variety_hops}, WiFi DNS delivers most of the message
+with a single hop due to a broadcast protocol whereas BT Nearby and
+BTLE need as many as two hops on average.
+%
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{figs/hops}}
 \caption{Average hop count}
 \label{fig:hop}
 \end{figure}
-
+%
 %
 \section{Related Work}
 \label{sec:related}
 %
 Apart from the state-of-the-art cited earlier, there have been other
-notable attempts at practical large-scale deployments and we describe
-them here. Before mid-2000’s, most of the research on MANETs was based
-on Department of Defense requirements, until commodity multi-hop ad
-hoc networks began to be considered \cite{bruno-mesh-2005}. However,
-it took another decade before wireless mesh networking was used
-commercially to enable smartphones to connect via Bluetooth and WiFi
-in a popular application called FireChat \cite{firechat}. The success
-of FireChat, partially due to the news coverage of its use in
-political situations in which governments restricted access to the
-Internet, has led to many alternatives in the past few years. An
-up-to-date list of such applications is available
-here \footnote{https://alternativeto.net/software/firechat-by-open-garden/}
+notable attempts at practical large-scale deployments, some of which
+will be described here. Before mid-2000s, most of the research on
+MANETs was based on Department of Defense requirements, until
+commodity multi-hop ad hoc networks began to be considered
+\cite{bruno-mesh-2005}. Around that time, academia and industry
+started publishing and implementing commodity mesh networks in
+university and industrial environments. Some notable projects from
+this era are: the community-based multi-hop wireless network by Bahl
+et al. at Microsoft Research \cite{microsoft-mesh}, the Broadband and
+Wireless Network (BWN) project at Georgia Tech \cite{gatech-mesh}, the
+testbed created at UCLA Network Research Lab for Wireless Mesh
+Networks and the evaluation of its performance of real-time traffic
+\cite{chavoutier-2007}, the wireless mesh network testbed at Shanghai
+Jiao Tong University \cite{wu-mesh-2010}, and a survey paper about
+Wireless Mesh Networks and its challenges at the transport layer
+\cite{saha-mesh-2014}.
+
+Despite these efforts, it took until 2014 before wireless mesh
+networking was used commercially to enable smartphones to connect via
+Bluetooth and WiFi in a popular application called FireChat
+\cite{firechat}. The success of FireChat, partially due to the news
+coverage of its use in political situations in which governments
+restricted access to the Internet, has led to many alternatives in the
+past few years. An up-to-date list of such applications is available
+here4. With the recent introduction of p2p support at the Operating
+System level by Apple and Google for smartphones, we believe there
+will be a significant increase in both academic and industrial
+implementations of large scale mesh networks in the upcoming years.
+%
 \section{Conclusions and Future Work}
 \label{sec:conclude}
+%
+We reported on MNA, a large-scale real-world hybrid ad hoc network for
+Android and iOS platforms. Leveraging a central service as the single
+source of trusted information with a novel c2p2p architecture enables
+a class of applications to take advantage of p2p communications over
+an increasing density of mobile devices. Operating system restrictions
+are addressed or bypassed with simple and creative algorithms without
+violating user privacy and security or app deverloper
+guidelines. Extensive experiments with real users, pilot users, and
+automation show that MNA enables low throughput connectivity on modern
+devices with low battery consumption on both Android and iOS
+platforms.
 
+Although MNA represents a significant step forward in the right
+direction, there are significant limitations to be overcome. First,
+many applications require peers to originate information, e.g., asking
+for help during a natural disaster. Hence, the issue of trust in open
+decentralized systems needs to be investigated.  Second, although MNA
+delivers almost all messages sent to all peers, it cannot guarantee a
+100\% delivery rate.  In many applications, such guarantees are
+needed. These are challenging problems for further research.
+
+%
 \section*{Acknowledgment}
 This research was sponsored by the U.S. Army Research Laboratory and
-the U.K. Ministry of Defence under Agree- ment Number
+the U.K. Ministry of Defence under Agreement Number
 W911NF-16-3-0001. The views and conclusions contained in this document
 are those of the authors and should not be interpreted as representing
 the official policies, either expressed or implied, of the U.S. Army
 Research Laboratory, the U.S. Government, the U.K. Ministry of Defence
-or the U.K. Government. The U.S. and U.K. Governments are au- thorized
+or the U.K. Government. The U.S. and U.K. Governments are Authorized
 to reproduce and distribute reprints for Government purposes
 notwithstanding any copyright notation hereon.
 \bibliographystyle{abbrv} \bibliography{smartcomp19}
 
 \end{document}
+
+% LocalWords:  hoc Nirmit Desai Chong Shahrokh Daijavad nirmit desai wendych BT
+% LocalWords:  hachilles shahrokh Porta MNA iOS MANETs Aquilla Serval stateful
+% LocalWords:  SDK APIs EMANE backend TTL DNS BTLE kbps LoS WiDi Hotspot MPC UI
+% LocalWords:  Bonjour interoperability orchestrator syncAll setupSystemAlert
+% LocalWords:  txt jammer MTU dnsAdvertise dnsDiscover msg fwdList bleDiscovery
+% LocalWords:  bleAdvert NSD latencies FireChat thorized smartcomp
