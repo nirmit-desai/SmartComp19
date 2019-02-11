@@ -11,6 +11,11 @@ R.~Bruno, M.~Conti, and E.~Gregori.
 \newblock Mesh networks: commodity multihop ad hoc networks.
 \newblock {\em IEEE Communications Magazine}, 43(3):123--131, March 2005.
 
+\bibitem{cheshire-dns-sd-2013}
+S.~Cheshire and R.~Krochmal.
+\newblock Dns-based service discovery.
+\newblock {\em RFC 6763}, Februray 2013.
+
 \bibitem{clausen-olsr-2003}
 T.~Clausen and P.~Jacquet.
 \newblock Optimized link state routing protocol (olsr).

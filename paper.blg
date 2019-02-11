@@ -9,45 +9,45 @@ Warning--empty title in firechat
 Warning--empty journal in firechat
 Warning--empty year in firechat
 Warning--empty title in perkins-ad-hoc-2001
-You've used 13 entries,
+You've used 14 entries,
             2118 wiz_defined-function locations,
-            581 strings with 5805 characters,
-and the built_in function-call counts, 4432 in all, are:
-= -- 431
-> -- 201
+            587 strings with 5899 characters,
+and the built_in function-call counts, 4674 in all, are:
+= -- 454
+> -- 214
 < -- 5
-+ -- 81
-- -- 66
-* -- 322
-:= -- 733
-add.period$ -- 40
-call.type$ -- 13
-change.case$ -- 70
++ -- 86
+- -- 70
+* -- 336
+:= -- 778
+add.period$ -- 43
+call.type$ -- 14
+change.case$ -- 75
 chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 180
-empty$ -- 347
-format.name$ -- 66
-if$ -- 939
+cite$ -- 20
+duplicate$ -- 190
+empty$ -- 364
+format.name$ -- 70
+if$ -- 987
 int.to.chr$ -- 0
-int.to.str$ -- 13
-missing$ -- 14
-newline$ -- 66
-num.names$ -- 26
-pop$ -- 81
+int.to.str$ -- 14
+missing$ -- 15
+newline$ -- 71
+num.names$ -- 28
+pop$ -- 86
 preamble$ -- 1
-purify$ -- 59
+purify$ -- 63
 quote$ -- 0
-skip$ -- 121
+skip$ -- 129
 stack$ -- 0
-substring$ -- 238
-swap$ -- 39
+substring$ -- 243
+swap$ -- 40
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 50
+type$ -- 54
 warning$ -- 6
-while$ -- 41
-width$ -- 15
-write$ -- 144
+while$ -- 43
+width$ -- 16
+write$ -- 154
 (There were 6 warnings)
