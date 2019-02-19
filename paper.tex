@@ -98,9 +98,9 @@ peer-to-peer systems, mobile ad hoc network, delay-tolerant network
 \end{IEEEkeywords}
 
 \section{Introduction}
-Mobile devices with programmable platforms such as android and iOS
+Mobile devices with programmable platforms such as Android and iOS
 have steadily grown over the last decade, surpassing the 2 billion
-mark \footnote{https://www.statista.com/statistics/330695/number-of-smartphone-users-worldwide/}. MANETs
+mark\footnote{https://www.statista.com/statistics/330695/number-of-smartphone-users-worldwide/}. MANETs
 have been widely studied given their decentralized nature and
 potential for new applications
 \cite{loo-manet-2011,perkins-ad-hoc-2001}. Most of the prior work on
@@ -114,15 +114,15 @@ growth of smartphones, large-scale real-world implementations may
 become feasible. This paper describes a real-world implementation of a
 p2p delay-tolerant network, called Mesh Network Alerts (MNA), for
 relaying severe weather information to millions of mobile device users
-as part of the Weather Channel app \cite{mna} on both android and iOS
+as part of the Weather Channel app \cite{mna} on both Android and iOS
 platforms.
 
 Before describing MNA, it is critical to identify applications that
-need p2p communication, given pervasive Internet connectivity. Doing
-so enables us to define key characteristics of such applications and
-focus on the challenges in meeting them.  This paper focuses on two
-separate classes of applications: communication in
-(a) disaster-affected or remote areas and (b) congested networks in
+need p2p communication, given pervasive Internet connectivity and the
+ease of using it. Doing so enables us to define key characteristics of
+such applications and focus on the challenges in meeting them.  This
+paper focuses on two separate classes of applications: communication
+in (a) disaster-affected or remote areas and (b) congested networks in
 densely populated areas, e.g., sports arenas.  The following are the
 key characteristics in these scenarios:
 
@@ -131,7 +131,7 @@ key characteristics in these scenarios:
 %
 \item\label{c:0} No communication infrastructure such as WiFi
   access points to fall back on
-\item\label{c:1} Network nodes are mobile, pattern of mobility is not
+\item\label{c:1} Device users are mobile, pattern of mobility is not
   predictable
 \item\label{c:2} New information may arrive at any time
 \item\label{c:3} Trustworthy information is scarce, misinformation and
@@ -162,21 +162,21 @@ applications remains elusive.
 A vast majority of the literature has focused on a traditional model
 of stateful, fully decentralized, reliable networking. Specifically,
 the nodes maintain connectivity with peers and routing is optimized
-with techniques based on link state or distance vectors
+with techniques based on link state (OLSR) or distance vectors (AODV)
 \cite{clausen-olsr-2003,perkins-aodv-2003} focusing on optimizing the
 network utilization.
 
 Given the application characteristics above, this paper identifies
-main practical challenges associated with modern device platforms and
-finds novel ways to overcome them.  This leads to MNA --- a new
-paradigm in p2p networking that employs a hybrid, delay-tolerant, and
-zero-routing overhead architecture.  Unlike previous MANET
-architectures, MNA is a hybrid of a centralized and a decentralized
-architecture, called \emph{center-to-peer-to-peer (c2p2p)}. A central service
-is leveraged as the trusted source of information while the
-information is propagated in a decentralized fashion by peers. Such an
-architecture allows MNA to bypass the key issue of trust deficit in
-open decentralized systems and scale while retaining the ability of
+practical challenges associated with modern device platforms and finds
+novel ways to overcome them.  This leads to MNA -- a new paradigm in
+p2p networking that employs a delay-tolerant, and zero-routing
+overhead architecture.  Unlike previous works, MNA is a hybrid of a
+centralized and a decentralized architecture, called
+\emph{center-to-peer-to-peer (c2p2p)}. A central service is leveraged
+as the trusted source of information while the information is
+propagated in a decentralized fashion by peers. Such an architecture
+allows MNA to bypass the key issue of trust deficit in open
+decentralized systems while retaining the ability of
 infrastructure-less communication in many application scenarios.
 
 MNA is implemented on both Android and iOS as an SDK and integrated
@@ -190,18 +190,19 @@ This paper makes the following key contributions:
   characteristics
 \item A deeper investigation of the practical challenges in supporting
   the above class of applications
-\item A novel c2p2p architecture implementation using multiple radio
-  channels for modern mobile platforms (Android and iOS)
-\item Experimental evaluation and deployment statistics
+\item A novel c2p2p implementation using multiple radio
+  channels on modern mobile platforms (Android and iOS)
+\item Experimental evaluation and real-world deployment statistics
 \end{itemize}
 
 In the following, Section~\ref{sec:challenges} describes the practical
 challenges. Section~\ref{sec:architecture} outlines the architectural
 details of MNA along with platform-specific implementation issues for
-Android and iOS in addressing the challenges. Experimental evaluation
-and deployment statistics are presented in Section~\ref{sec:eval}.  A
-deeper look at the literature and contrast to MNA is summarized in
-Section~\ref{sec:related} with conclusions in
+Android and iOS in addressing the challenges. Section~\ref{sec:algo}
+dives into the algorithms of two of the MNA protocols. Experimental
+evaluation and deployment statistics are presented in
+Section~\ref{sec:eval}.  A deeper look at the literature and contrast
+to MNA is summarized in Section~\ref{sec:related} with conclusions in
 Section~\ref{sec:conclude}.
 %
 \section{Challenges}
@@ -217,13 +218,13 @@ feedback from the developers of Android and iOS.
 %
 Due to \ref{c:2}, even when a user is not interacting with an app, or
 worse yet, when the device is not being used at all, the devices must
-continue to discover peer devices to receive and forward
+continue to discover peers to receive and forward
 information. Although modern mobile operating systems such as Android
-and iOS offer APIs to discover and advertise information to peer
-devices over WiFi and Bluetooth interfaces, peer-to-peer connections
-do not work reliably when the same APIs are accessed while the app is
-in the background. Further, on Android, each WiFi p2p connection must
-be explicitly approved by the device user. Prior works widely document
+and iOS offer APIs to discover and advertise information to peers over
+WiFi and Bluetooth interfaces, peer-to-peer connections do not work
+reliably when the same APIs are accessed while the app is in the
+background. Further, on Android, each WiFi p2p connection must be
+explicitly approved by the user. Prior works widely document
 these challenges and take the approach of having special access on the
 devices, e.g., jail-breaking or rooting
 \cite{gardner-stephen-serval-2011}. Clearly, such an approach does not
@@ -247,9 +248,9 @@ radio channels.
 %
 Given the heterogeneity of devices owned by users and operating system
 distributions (\ref{c:6}), it is challenging to test whether or not
-MNA functions as expected on a single device. Further, running test
+MNA works as expected on a single device. Further, running test
 scenarios on a p2p network at large-scale is non-trivial given that a
-large number of devices need to take specific coordinated action
+large number of devices need to take coordinated action
 followed by coordinated observations to determine whether a test
 passes or fails. Further, since range and mobility affect p2p
 communications and they are unpredictable (\ref{c:1}), it is important
@@ -257,24 +258,24 @@ to run test cases under various mobility patterns across all nodes in
 the network.  Emulated mobility frameworks such as CORE
 \cite{arenholz-core-2008} and EMANE \cite{emane} fall short as the
 connection latency and wireless transmission are specific to device
-model and radio.  This is not a challenge in traditional mobile
+hardware.  This is not a challenge in traditional mobile
 application development as the application functionality is confined
 within a single connected device.
 %
 \subsection{Trust in information}
 %
-As user devices with MNA advertise on unsecured wireless protocols, it
-may be possible for a malicious attacker to listen for such
-advertisements and reverse-engineer the message formats and protocols
-used. Then, the attackers may generate fake messages and advertise
-them, e.g., a fake tornado alert. Given a lack of trusted information
-in such scenarios (\ref{c:3}), misinformation campaigns can have
-disastrous consequences.  In open decentralized systems, such false
-messages cannot be distinguished from the real ones, and MNA will end
-up propagating them to as many devices as possible, ``poisoning'' the
+As user devices advertise on unsecured wireless protocols, it may be
+possible for a malicious attacker to listen for such advertisements
+and reverse-engineer the protocols used. Then, the attackers may
+generate fake messages and advertise them, e.g., a fake tornado
+alert. Given a lack of trusted information in such scenarios
+(\ref{c:3}), misinformation campaigns can have disastrous
+consequences.  In open decentralized systems, such false messages
+cannot be distinguished from the real ones, and MNA will end up
+propagating them to as many devices as possible, ``poisoning'' the
 network. In general, veracity of such information cannot be
-independently verified in open decentralized systems and previous works
-on peer-to-peer networks do not address this challenge.
+independently verified in open decentralized systems and previous
+works on peer-to-peer networks do not address this challenge.
 %
 \section{C2P2P System Architecture}
 \label{sec:architecture}
@@ -289,7 +290,7 @@ To address (or bypass) the challenges identified above, this paper
 proposes c2p2p -- a hybrid architecture that leverages a central
 service as the sole source of trusted information as depicted in
 Figure~\ref{fig:arch}. An application-specific central service, e.g.,
-weather.com backend, originates new information as a push message and
+weather.com backend, originates new information and
 assigns it a unique identifier. Next, the central service produces a
 digital signature using its private key and appends it to the message
 payload. Finally, header parameters specifying TTL (duration after
@@ -298,31 +299,30 @@ destination peer identifier list (for uni-cast) or a special identifier
 (for broadcast), and the time of origin are added to the message and
 the message is sent to a push notification service for distribution.
 
-Mobile applications integrate MNA as an SDK including the public key
-of the corresponding central service. Peers having Internet
-connectivity receive the push messages and verify the digital
-signature to protect against spread of misinformation.  If the message
-has not expired and is destined to other peers, then the receiving
-peers start forwarding the message to other peers. Depending on the
-protocol being used, such forwarding happens as a uni-cast or
-broadcast.
+Mobile applications integrate MNA as an SDK with the public key of the
+corresponding central service. Peers having Internet connectivity
+receive the push messages and verify the digital signature.  If the
+signature is valid, the message has not expired, and is destined to
+other peers, then the receiving peers forward the message to other
+peers. Depending on the protocol being used, such forwarding happens
+as a uni-cast or broadcast. Peers receiving the forwarded messages
+also verify the digital signature before forwarding further.
 
-Since new information can arrive at any time or new peers may come
-into proximity, and message transmissions are not reliable, all peers
-store unexpired and verified messages and continue to forward them to
-proximal peers repeatedly. This implies that peers may receive the
-same message more than once but since the messages are globally
-unique, duplicates can be identified and ignored.  A peer sending a
-message adds its own peer identifier to a list of forwarders appended
-to the message header.  A receiving peer thus knows all the peers that
-already have the message and stops repeating the message to those
-peers, controlling the flooding.  As there are no control messages or
-any other overhead for routing, we call this \emph{zero-overhead}
-routing.
+Since new information can arrive at any time, new peers may come into
+proximity, or message transmissions fail, all peers store unexpired
+and verified messages and forward them to proximal peers
+repeatedly. This implies that peers may receive a message more than
+once but since the messages are globally unique, duplicates can be
+identified and ignored.  A peer sending a message adds its own peer
+identifier to a list of forwarders appended to the message header.  A
+receiving peer thus knows all the peers that already have the message
+and stops repeating the message to those peers, controlling the
+flooding.  As there are no control messages or any other overhead for
+routing, we call this \emph{zero-overhead} routing.
 
 The following assesses the c2p2p architecture relative to the
 challenges identified above along with known limitations. Further, to
-realize this architecture on mobile devices, we evaluated a variety of
+realize this architecture on mobile devices, we evaluate a variety of
 protocols on both Android and iOS. As described later, WiFi DNS on
 Android, Bluetooth Nearby on Android, and Bluetooth low energy (BTLE)
 on both Android and iOS are the only protocols that were found
@@ -331,13 +331,6 @@ connection vary across these protocols and are described next.
 %
 \subsection{Operating system restrictions}
 \label{sec:os}
-MNA works around the background activity and user permission
-restrictions via innovative techniques, without resorting to hacks
-that may violate user security or App-store guidelines.
-Tables~\ref{tab:android} and~\ref{tab:ios} summarize the various
-protocols we have experimented with using WiFi and Bluetooth
-interfaces, along with key findings as described here.  The protocols
-actually deployed are in bold.
 %
 %
 \begin{table}[H]
@@ -360,6 +353,15 @@ actually deployed are in bold.
 \end{tabular}
 \end{table}
 %
+
+MNA works around the background activity and user permission
+restrictions via innovative techniques, without resorting to hacks
+that may violate user security or developer guidelines.
+Tables~\ref{tab:android} and~\ref{tab:ios} summarize the various
+protocols we have experimented with using WiFi and Bluetooth
+interfaces, along with key findings as described here.  The protocols
+actually deployed are in bold.
+
 %
 \begin{table}[H]
 \caption{iOS protocols and key findings}
@@ -379,20 +381,21 @@ actually deployed are in bold.
 \end{table}
 %
 
-Line of sight range in feet was measured by manually placing devices
-at increasing distances until they fail to communicate. Battery
-consumption per hour was measured as a difference between baseline
-battery consumption and when MNA was left running for 12
-hours. Reported numbers are an average percentage consumption across
-about 50 devices on each platform.
+Throughput is measured over a single p2p hop. Line of Sight (LoS)
+range in feet was measured by manually placing devices at increasing
+distances until they fail to communicate. Battery consumption per hour
+was measured as a difference between baseline battery consumption and
+when MNA was left running for 12 hours. Reported numbers are an
+average percentage consumption across about 50 devices on each
+platform.
 
 BTLE is the only cross-platform protocol, although there are
 limitations with operating system versions as shown in
-Table~\ref{tab:android_ios}. Android is denoted as A, 18 and 21 are
-correspond to Android versions 4.3 and 5.0 respectively, and C and P
-denote the roles of Central and Peripheral. Key finding is that
-Android 4.3 devices acting as Peripheral cannot communicate either as
-senders or receivers.
+Table~\ref{tab:android_ios}. Android is denoted as A, 18 and 21 API
+levels corresponding to Android versions 4.3 and 5.0 respectively, and
+C and P denote the roles of Central and Peripheral. Key finding is
+that Android 4.3 devices acting as Peripheral cannot communicate
+either as senders or receivers.
 %
 \begin{table}[H]
 \caption{BTLE interoperability between Android and iOS devices}
@@ -445,7 +448,7 @@ period makes the device less aggressive. Secondly, we allow the
 central service to broadcast``wake up'' messages ahead of an
 anticipated severe weather event.  When devices receive such messages,
 they schedule themselves to remain aggressive during the specified
-window of time.  Outside of this window, the device can afford to have
+window of time.  Outside of this window, the devices can afford to have
 long sleep cycles and conserve power. With these techniques, our
 testing shows less than 2\% battery consumption per hour on most
 device models.
@@ -462,31 +465,30 @@ uncovering bugs at a fast pace with tens of physical devices employed
 for automated testing.  Further, the automation framework is general
 and can be expressly applied to test other apps in this fashion.
 
-Figure~\ref{fig:test_arch} shows the overall test automation
-architecture. A tester specifies high-level test cases and expected
-results in a platform and device agnostic fashion. Mobile devices run
-a UI proxy for executing platform and device-specific UI command while
-a central laptop terminal acts as the overall orchestrator and
-translates high-level test cases and distributes them to
-devices. Since the orchestrator needs a wired access to the devices
-and the devices cannot be programmed to move (unlike drones and bots),
-testing of range and mobility patterns needs to done manually, which
-is a known limitation.
+Figure~\ref{fig:test_arch} shows the test automation architecture. A
+tester specifies high-level test cases and expected results in a
+platform and device-agnostic fashion. Mobile devices run a UI proxy
+app for executing platform and device-specific UI commands while a
+central laptop terminal acts as the overall orchestrator. The
+orchestrator translates high-level test cases and distributes them to
+devices. Since the orchestrator needs wired access to the devices and
+the devices cannot be programmed to move, testing of range and
+mobility patterns needs to done manually, which is a known limitation.
 
 A key innovation here is the platform-independent language for
 specifying high-level test cases and a small set of primitive commands
 it translates to. We describe here the list of primitive commands and
-a screen recording across seven Android devices demonstrates this
-powerful capability \cite{mna-test-demo}.
+have made available a screen recording across seven Android devices
+demonstrates this powerful capability \cite{mna-test-demo}.
 \begin{itemize}
-\item \textsf{syncAll} Wait for all devices to reach this point
-\item \textsf{object.find} Find a UI object by name or position
-\item \textsf{object.click} Click a UI object
-\item \textsf{sleep} Wait for the specified duration
-\item \textsf{setupSystemAlert} Respond to a system popup
-\item \textsf{text.set} Highlight a text input box
-\item \textsf{text.write} Write text to the text box
-\item \textsf{swipe} Swipe to the left/right or up/down
+\item \textsf{syncAll} -- Wait for all devices to reach this point
+\item \textsf{object.find} -- Find a UI object by name or position
+\item \textsf{object.click} -- Click a UI object
+\item \textsf{sleep} -- Wait for the specified duration
+\item \textsf{setupSystemAlert} -- Respond to a system popup
+\item \textsf{text.set} -- Highlight a text input box
+\item \textsf{text.write} -- Write text to the text box
+\item \textsf{swipe} -- Swipe to the left/right or up/down
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -499,12 +501,11 @@ powerful capability \cite{mna-test-demo}.
 \subsection{Trust in information}
 \label{sec:trust}
 %
-In c2p2p, since the origin of information is always the central
-service, digital signatures can be attached to all messages
-originating from the service. The mobile application is distributed
+In c2p2p, since the central service originates all messages, it can
+digitally sign them. The mobile application is distributed
 with the corresponding public key so that digital signatures from the
 service can be verified.  If a message fails such a verification, it
-is discarded and not forwarded any further. 
+is discarded and not forwarded any further.
 
 Peers cannot originate messages however as then a malicious peer can
 join the network, exchange keys with other peers, start generating,
@@ -514,7 +515,7 @@ register their identity with a certificate authority and reporting the
 originators of fake information may discourage malicious behavior.
 Clearly, this is even harder to solve than the spread of fake
 information over the Internet because ground truth is hard to find and
-malicious peers can report genuine sources of information as well.
+malicious peers can report genuine sources of information as fake.
 %
 \section{Algorithms}
 \label{sec:algo}
@@ -524,46 +525,50 @@ malicious peers can report genuine sources of information as well.
 %
 DNS service discovery is a widely supported protocol
 \cite{cheshire-dns-sd-2013}. On Android, WiFi DNS improvises on this
-standard such that the exchange of information happens without making
-network connections at all. This is achieved by splitting the message
-payloads into small enough chunks and stuffing them into service
-advertisements as txt records and broadcast over multiple
-advertisements in a quick succession. Since there are no connections
-being made, the messages can be exchanged without prompting the user
-to grant permissions for each connection. Since no peer connections
-are needed and advertisements and discovery are broadcast, WiFi DNS is
-a broadcast protocol. On iOS, Bonjour protocol is built on DNS service
-discovery but is power-hungry and does not inter-operate with WiFi DNS
-on Android. Algorithm~\ref{algo:dns} outlines the peer process for
-WiFi DNS. Power conservation via time intervals is achieved by
-manipulating $T_{ad}$ and $T_{disc}$ based on traffic. 
+standard such that communication happens without making network
+connections. This is achieved by splitting the message payloads into
+small enough chunks, stuffing them into service advertisements as txt
+records, and broadcasting them over multiple advertisements. Since
+there are no connections being made, the messages can be exchanged
+without prompting the user to grant permissions for each
+connection. Since no peer connections are needed and advertisements
+and discovery are broadcast, WiFi DNS is a broadcast
+protocol. Although the standard states that as much as 65KB of txt
+records can be added to advertisements, in practice most devices
+support only up to 750 bytes. On iOS, Bonjour protocol is built on DNS
+service discovery but is power-hungry and does not inter-operate with
+WiFi DNS on Android. Algorithm~\ref{algo:dns} outlines the peer
+process for WiFi DNS. Power conservation via time intervals is
+achieved by manipulating timers $T_{ad}$ and $T_{disc}$ based on
+traffic. $\mathbb{M}$ is the set of all unexpired messages.
 
 Messages from multiple applications are forwarded on the same network,
 but a peer can validate signatures only for the messages targeting an
-app it hosts. Peers simply forward messages not targeting one of their
-apps. Key benefit of this design is that the density of peers is
-available to all apps, making c2p2p scenarios viable even when an
-individual app does not have a sufficient density of users.  However,
-this also allows a malicious jammer to generate traffic for a fake
-app and force the peers to forward it (as they do not match any of the
-apps) until the messages expire.  Although the fake information will
-never be delivered to the apps, this issue can affect MNA throughput
-for legitimate apps. A possible solution would be to maintain a
-central registry of $a_{id}$ and distribute it to all peers across
-apps.
+app it hosts. This is because peers do not possess the public keys
+corresponding to the central services of other apps. Hence, peers
+simply forward messages not targeting one of their apps. Key benefit
+of this design is that the entire network of peers is available to all
+apps, making c2p2p scenarios viable even when an individual app does
+not have a sufficient density of users.  However, this also allows a
+malicious jammer to generate traffic for a fake app, forcing the peers
+to forward it until the messages expire.  Although the fake
+information will never be delivered to the apps, this affects
+throughput. A possible solution would be to distribute a registry of
+valid $a_{id}$ to all peers across apps so that they can ignore
+messages with fake $a_{id}$ and not forward them.
 
 \begin{algorithm}[htb!]
 \label{algo:dns}
 \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
 \SetAlgoLined
-\KwIn{Peer id $p_{id}$}
-\KwIn{App id $a_{id}$, max advert/discovery intervals $max_{ad}$, $max_{disc}$}
+\KwIn{Peer id $p_{id}$, App id $a_{id}$}
+\KwIn{max advert/discovery intervals $max_{ad}$, $max_{disc}$}
 \KwIn{min advert/discovery intervals $min_{ad}$, $min_{disc}$}
  $S_{name} \gets$ \textsf{'MNA'}\;
  $\mathbb{M} \gets \varnothing$\;
  $T_{ad} \gets min_{ad}$\;
  $T_{disc} \gets min_{disc}$\;
- $New \gets 0$
+ $New \gets 0$\;
  \ForEach{timer expiry $T_{ad}$}{
    $\mathbb{M} \gets \mathbb{M} -$ expired messages\;
    $\mathbb{M}_{sort} \gets$ $\mathbb{M}$ sorted by least advertised first\;
@@ -610,15 +615,15 @@ apps.
 \subsection{BTLE}
 \label{sec:btle}
 %
-The only protocol that stays reliably active in
-background without violating iOS developer guidelines is BTLE. Unlike
-Android, iOS applications do not need to request discovery and
-advertisements continually. Once a BTLE Peripheral (role that has
-information) is advertised and a Central (role that receives
-information) requests discovery, the app is allowed to go to
-sleep. When a matching central or a peripheral device is found, iOS
-wakes up the application app to handle such an event, even when the
-application is in the background. MNA builds on this and leverages
+
+The only protocol that stays reliably active in background without
+violating developer guidelines is BTLE. Unlike Android, iOS
+applications do not need to discover and advertise continually. Once a
+BTLE Peripheral (role that has information) is advertised and a
+Central (role that receives information) requests discovery, the app
+is allowed to go to sleep. When a matching Central or a Peripheral is
+found, iOS wakes up the application to handle such an event, even when
+the application is in the background. MNA builds on this and leverages
 asynchronous dispatch queues to turn each peer into a Central as well
 as a Peripheral simultaneously. This architecture allows bidirectional
 data transfers without concurrency issues.
@@ -628,10 +633,9 @@ biggest difference with WiFi DNS is that discovery and advertisements
 happen only once per app launch. Secondly, the entire peer process is
 event-driven, so the app can sleep when there are no events to
 process. The list of forwarders for each message $M.fwdList$ is key in
-controlling the duplicates and in turn network utilization without
-overhead messages. In practice, limiting number of Peripherals a
-Central connects to enables reliable communications, specified by
-$max_p$.
+controlling duplicate transmissions without overhead messages. In
+practice, limiting number of Peripherals a Central connects to enables
+reliable communications, specified by $max_p$.
 
 \begin{algorithm}[htb!]
 \label{algo:btle}
@@ -699,16 +703,15 @@ $max_p$.
 \section{Experimental Results}
 \label{sec:eval}
 %
-Although MNA is deployed to about $10$ million users, collecting a
-significant amount of data runs into privacy and scale issues. Also,
-given the challenges associated with tests involving a large number of
-physical devices along with human mobility patterns, we employ a
-three-pronged approach to evaluation: (1) Limited metrics from the MNA
-user population, (2) recruit human volunteers (colleagues at IBM) in a
-pilot to have the app on their personal devices and run tests in the
-background, and (3) use the automated test environment to run
-controlled experiments. All experiments mentioning WiFi are on the
-WiFi DNS channel and BT is Bluetooth classic.
+Although MNA is deployed to about $10$ million users, collecting test
+data runs into privacy and scale issues. Also, given that testing with
+a large number of physical devices along with mobility is challenging,
+we employ a three-pronged approach to evaluation: (1) gather limited
+metrics from the MNA user population, (2) recruit human volunteers in
+a pilot to have the tests run on their personal devices, and (3) use
+the automated test environment to run controlled experiments. All
+experiments mentioning WiFi are on the WiFi DNS channel and BT is
+Bluetooth classic.
 %
 \subsection{MNA limited experiment}
 \label{sec:mna}
@@ -719,18 +722,18 @@ WiFi DNS channel and BT is Bluetooth classic.
 \label{fig:mna}
 \end{figure}
 %
-As Figure~\ref{fig:mna} shows, measures of number of messages received
-first via MNA and the number of unique users was collected during a week in
-June 2018. Almost no MNA messages were received with a roll-out to
-$10\%$ of the users.  This makes sense given that p2p needs critical
-density of users to propagate messages over large distances.  With
-$100\%$ of the users participating, 6 million+ weather alerts were
-received first via MNA by 1.9 million+ users within the collection
-period. Even when the users are connected to the Internet, they
-may receive the alert via MNA before the push notification arrives via
-the Internet. Given that such a large population of users received it
-via MNA first implies that there is value in the c2p2p architecture
-even when Internet connectivity is available.
+As Figure~\ref{fig:mna} shows, test data comprising number of messages
+received first via MNA and the number of unique users was collected
+during a week in June 2018. Almost no MNA messages were received with
+a roll-out to $10\%$ of the users.  This makes sense given that p2p
+needs critical density of users to propagate messages over large
+distances.  With $100\%$ of the users participating, 6 million+
+weather alerts were received first via MNA by 1.9 million+ users. Even
+when the users are connected to the Internet, they may receive the
+alert via MNA before the push notification arrives via the
+Internet. Given that such a large population of users received it via
+MNA first implies that there is value in the c2p2p architecture even
+when Internet connectivity is available.
 %
 \subsection{Pilot test results}
 \label{sec:romania}
@@ -738,21 +741,19 @@ even when Internet connectivity is available.
 About 25 colleagues participated in a pilot on a site across two
 office buildings and about a thousand people in total.  Clearly, the
 user density in this case was low. The app installed on their personal
-devices sent a broadcast message of varying sizes every five minutes
+devices broadcast messages of varying sizes every five minutes
 and statistics on MNA were collected. 
 
-Overall, about 13\% of the messages were received at least once
-(depends on density of users in the building) while users actively
-used the devices for ~5\% of the time.  Figure~\ref{fig:romania_lat}
-shows number of messages received and how the single-hop latency
-varies between WiFi DNS and BT Classic and across increasing packet
-sizes. Except for the 1000 byte+ packets, WiFi DNS achieved lower
-end-to-end latencies than BT Classic, perhaps due to its broadcast
-model and wide support across devices. This also explains why more
-messages were delivered over WiFi DNS than BT Classic. Packet sizes
-did not affect single-hop latencies on p2p DNS, perhaps because most
-of the messages fit within a single advertised chunk of up to 750
-bytes.
+Overall, about 13\% of the messages were received at least once while
+users actively used the devices for ~5\% of the time.
+Figure~\ref{fig:romania_lat} shows how number of messages received and
+the single-hop latency vary between WiFi DNS and BT Classic with
+increasing packet sizes. Except for the 1000 byte+ packets, WiFi DNS
+achieved lower end-to-end latencies than BT Classic, perhaps due to
+its broadcast model. This also explains why more messages were
+delivered over WiFi DNS than BT Classic. Packet sizes did not affect
+single-hop latencies on WiFi DNS, perhaps because most of the messages
+fit within a single advertised chunk.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\columnwidth]{figs/romania_latency}}
@@ -771,21 +772,24 @@ bytes.
 \label{sec:automated}
 %
 We turn to the automated testing with up to 10 physical devices to
-carry out some controlled testing and a deeper understanding of how
-the various MNA protocols behave.
+carry out some controlled experiments and a deeper understanding of
+how the various MNA protocols behave. In these experiments, all
+messages has a TTL of 15 minutes and all messages were received within
+that duration except for the 10KB messages on WiFi DNS.
 %
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=\columnwidth]{figs/variety_e2e_latency}}
+\centerline{\includegraphics[width=0.8\columnwidth]{figs/variety_e2e_latency}}
 \caption{End-to-end latency, WiFi DNS vs. BT Classic}
 \label{fig:variety_e2e}
 \end{figure}
 %
-Figure~\ref{fig:variety_e2e} shows end-to-end latency results in a test
-involving three Android devices, each sending a variety of message and
-payload size configurations. Latency is shown on a logarithmic scale
-y-axis. Total load on network increases from left to right on
-x-axis while the number of messages is small for the first and third
-configurations and large for the second and fourth configuration. 
+
+Figure~\ref{fig:variety_e2e} shows end-to-end latency results with
+three Android devices, each sending a varying number of messages with
+varying sizes. Latency is shown on y-axis on a logarithmic
+scale. Total load on network increases from left to right on x-axis
+while the number of messages is small for the first and third
+cases it is large for the second and fourth cases.
 
 As expected, WiFi DNS latency increases significantly with network
 load given its very low throughput. As BT Classic cannot broadcast, it
@@ -799,18 +803,18 @@ network topology by measuring average hop counts. WiFi DNS always
 needs fewer hops to deliver messages than BT Classic.
 %
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=\columnwidth]{figs/variety_hops}}
+\centerline{\includegraphics[width=0.8\columnwidth]{figs/variety_hops}}
 \caption{Hop counts, WiFi DNS vs. BT Classic}
 \label{fig:variety_hops}
 \end{figure}
 %
 
 Next, we compare WiFi DNS and BT Nearby on Android with BTLE on iOS in
-terms of end-to-end latency as the payload size is increased as shown
+terms of end-to-end latency as the payload size increases as shown
 in Figure~\ref{fig:e2e}. The results were collected over three repeats
 of the experiment involving up to 10 android devices and 6 iOS
 devices. BTLE is almost 100x faster than WiFi DNS and BT Nearby. For
-Wifi DNS, as payload size approaches the max advertisement chunk size
+WiFi DNS, as payload size approaches the max advertisement chunk limit
 of 750 bytes, the end-to-end latency rises by almost 10x (100 bytes
 versus 720 bytes). Behavior of BT Nearby taking time to form
 connections but having a good throughput is evident as the end-to-end
@@ -818,7 +822,7 @@ latency does not change even when payload sizes go up to 10KB. BTLE on
 the other hand gets 10x slower with 10KB payloads as compared to 1KB.
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=\columnwidth]{figs/e2e_latency}}
+\centerline{\includegraphics[width=0.8\columnwidth]{figs/e2e_latency}}
 \caption{End-to-end latency, WiFi DNS vs. BT Nearby vs. BTLE}
 \label{fig:e2e}
 \end{figure}
@@ -841,7 +845,7 @@ to be delivered per message). The forward list in BT Nearby and BTLE
 help control the duplicates significantly.
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=\columnwidth]{figs/duplicates}}
+\centerline{\includegraphics[width=0.8\columnwidth]{figs/duplicates}}
 \caption{Duplicity due to zero-overhead routing}
 \label{fig:dup}
 \end{figure}
@@ -853,8 +857,8 @@ with a single hop due to a broadcast protocol whereas BT Nearby and
 BTLE need as many as two hops on average.
 %
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=\columnwidth]{figs/hops}}
-\caption{Average hop count}
+\centerline{\includegraphics[width=0.8\columnwidth]{figs/hops}}
+\caption{Avg hop count, WiFi DNS vs. BT Nearby vs. BTLE}
 \label{fig:hop}
 \end{figure}
 %
@@ -887,25 +891,30 @@ Bluetooth and WiFi in a popular application called FireChat
 coverage of its use in political situations in which governments
 restricted access to the Internet, has led to many alternatives in the
 past few years. An up-to-date list of such applications is available
-here4. With the recent introduction of p2p support at the Operating
-System level by Apple and Google for smartphones, we believe there
-will be a significant increase in both academic and industrial
+here\footnote{https://alternativeto.net/software/firechat-by-open-garden/}.
+All of these works are fully decentralized and cannot guarantee
+veracity of information being propagated.
+
+Unlike the above-cited works, MNA employs a hybrid architecture
+focused on trusted information and low throughput low-power
+protocols. With the recent introduction of p2p support at the
+operating system level by Apple and Google for smartphones, we believe
+there will be a significant increase in both academic and industrial
 implementations of large scale mesh networks in the upcoming years.
 %
 \section{Conclusions and Future Work}
 \label{sec:conclude}
 %
 We reported on MNA, a large-scale real-world hybrid ad hoc network for
-Android and iOS platforms. Leveraging a central service as the single
-source of trusted information with a novel c2p2p architecture enables
-a class of applications to take advantage of p2p communications over
-an increasing density of mobile devices. Operating system restrictions
-are addressed or bypassed with simple and creative algorithms without
-violating user privacy and security or app deverloper
-guidelines. Extensive experiments with real users, pilot users, and
-automation show that MNA enables low throughput connectivity on modern
-devices with low battery consumption on both Android and iOS
-platforms.
+Android and iOS platforms. Leveraging a central service as the source
+of trusted information with a novel c2p2p architecture enables a class
+of applications over an increasing density of mobile devices. MNA
+addresses or bypasses operating system restrictions with simple and
+creative algorithms without violating user privacy, security, or
+developer guidelines. Extensive experiments with real users, pilot
+users, and automation show that MNA enables low-throughput
+connectivity on modern devices with low battery consumption on both
+Android and iOS platforms.
 
 Although MNA represents a significant step forward in the right
 direction, there are significant limitations to be overcome. First,

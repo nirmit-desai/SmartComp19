@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  11 FEB 2019 14:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  12 FEB 2019 10:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -518,57 +518,53 @@ phone-users-
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 218--232
+Underfull \hbox (badness 3557) in paragraph at lines 195--196
+[]\OT1/ptm/m/n/10 Experimental eval-u-a-tion and real-world de-ploy-ment
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--233
 
  []
 
-<figs/arch.pdf, id=12, 883.3pt x 417.56pt>
+<figs/arch.pdf, id=12, 888.31876pt x 427.5975pt>
 File: figs/arch.pdf Graphic file (type pdf)
  <use figs/arch.pdf>
-Package pdftex.def Info: figs/arch.pdf used on input line 283.
-(pdftex.def)             Requested size: 252.0pt x 119.12688pt.
+Package pdftex.def Info: figs/arch.pdf used on input line 284.
+(pdftex.def)             Requested size: 252.0pt x 121.2989pt.
  [2 <./figs/arch.pdf>]
-Overfull \hbox (5.72151pt too wide) in paragraph at lines 347--361
+Overfull \hbox (5.72151pt too wide) in paragraph at lines 340--354
  [][] 
  []
 
 
-Overfull \hbox (4.69745pt too wide) in paragraph at lines 368--379
+Overfull \hbox (4.69745pt too wide) in paragraph at lines 370--381
  [][] 
  []
 
+[3]
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 484.
 
-Underfull \vbox (badness 2245) has occurred while \output is active []
-
- [3]
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 482.
-
-
-(/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1phv.fd
+ (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 <figs/test_arch.pdf, id=31, 1138.2525pt x 596.2275pt>
 File: figs/test_arch.pdf Graphic file (type pdf)
  <use figs/test_arch.pdf>
-Package pdftex.def Info: figs/test_arch.pdf used on input line 493.
+Package pdftex.def Info: figs/test_arch.pdf used on input line 495.
 (pdftex.def)             Requested size: 252.0pt x 131.99834pt.
-
-[4 <./figs/test_arch.pdf>]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 601.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 606.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
-Underfull \vbox (badness 3260) has occurred while \output is active []
-
-
-<figs/mna.pdf, id=48, 658.46pt x 412.54124pt>
+) [4 <./figs/test_arch.pdf>] <figs/mna.pdf, id=49, 658.46pt x 412.54124pt>
 File: figs/mna.pdf Graphic file (type pdf)
  <use figs/mna.pdf>
-Package pdftex.def Info: figs/mna.pdf used on input line 717.
+Package pdftex.def Info: figs/mna.pdf used on input line 720.
 (pdftex.def)             Requested size: 252.0pt x 157.88148pt.
- [5 <./figs/mna.pdf>]
+
+[5 <./figs/mna.pdf>]
 Underfull \vbox (badness 1215) has occurred while \output is active []
 
 
@@ -576,49 +572,50 @@ Underfull \vbox (badness 1215) has occurred while \output is active []
 File: figs/romania_latency.pdf Graphic file (type pdf)
 
 <use figs/romania_latency.pdf>
-Package pdftex.def Info: figs/romania_latency.pdf used on input line 758.
+Package pdftex.def Info: figs/romania_latency.pdf used on input line 759.
 (pdftex.def)             Requested size: 252.0pt x 151.13794pt.
 
 <figs/variety_e2e_latency.pdf, id=66, 523.9575pt x 299.1175pt>
 File: figs/variety_e2e_latency.pdf Graphic file (type pdf)
 
 <use figs/variety_e2e_latency.pdf>
-Package pdftex.def Info: figs/variety_e2e_latency.pdf used on input line 778.
-(pdftex.def)             Requested size: 252.0pt x 143.8623pt.
- [6 <./figs/romania_latency.pdf>]
-<figs/variety_hops.png, id=80, 524.96124pt x 298.11375pt>
+Package pdftex.def Info: figs/variety_e2e_latency.pdf used on input line 781.
+(pdftex.def)             Requested size: 201.60077pt x 115.08984pt.
+
+<figs/variety_hops.png, id=67, 524.96124pt x 298.11375pt>
 File: figs/variety_hops.png Graphic file (type png)
 
 <use figs/variety_hops.png>
-Package pdftex.def Info: figs/variety_hops.png used on input line 802.
-(pdftex.def)             Requested size: 252.0pt x 143.10661pt.
-
+Package pdftex.def Info: figs/variety_hops.png used on input line 806.
+(pdftex.def)             Requested size: 201.60077pt x 114.48529pt.
+ [6 <./figs/romania_latency.pdf>]
 <figs/e2e_latency.pdf, id=82, 517.935pt x 293.095pt>
 File: figs/e2e_latency.pdf Graphic file (type pdf)
 
 <use figs/e2e_latency.pdf>
-Package pdftex.def Info: figs/e2e_latency.pdf used on input line 821.
-(pdftex.def)             Requested size: 252.0pt x 142.60706pt.
+Package pdftex.def Info: figs/e2e_latency.pdf used on input line 825.
+(pdftex.def)             Requested size: 201.60077pt x 114.08296pt.
 
 <figs/duplicates.pdf, id=83, 518.93875pt x 292.09125pt>
 File: figs/duplicates.pdf Graphic file (type pdf)
 
 <use figs/duplicates.pdf>
-Package pdftex.def Info: figs/duplicates.pdf used on input line 844.
-(pdftex.def)             Requested size: 252.0pt x 141.84235pt.
+Package pdftex.def Info: figs/duplicates.pdf used on input line 848.
+(pdftex.def)             Requested size: 201.60077pt x 113.47388pt.
  <figs/hops.pdf, id=84, 518.93875pt x 288.07625pt>
 File: figs/hops.pdf Graphic file (type pdf)
 
 <use figs/hops.pdf>
-Package pdftex.def Info: figs/hops.pdf used on input line 856.
-(pdftex.def)             Requested size: 252.0pt x 139.89262pt.
+Package pdftex.def Info: figs/hops.pdf used on input line 860.
+(pdftex.def)             Requested size: 201.60077pt x 111.91411pt.
  [7 <./figs/variety_e2e_latency.pdf> <./figs/variety_hops.png> <./figs/e2e_late
-ncy.pdf> <./figs/duplicates.pdf>] (./paper.bbl
+ncy.pdf> <./figs/duplicates.pdf> <./figs/hops.pdf>]
+(./paper.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 43--46
 []\OT1/ptm/m/n/8 IBM.  Mesh Net-work Alerts (MNA).  Avail-able at
  []
 
-[8 <./figs/hops.pdf>])
+)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -630,9 +627,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[9
-
-] (./paper.aux) )
+[8] (./paper.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
@@ -660,10 +655,10 @@ ive/2017/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/201
 st/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/
 type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/urw/
 times/utmri8a.pfb>
-Output written on paper.pdf (9 pages, 2890973 bytes).
+Output written on paper.pdf (8 pages, 2898231 bytes).
 PDF statistics:
- 183 PDF objects out of 1000 (max. 8388607)
- 122 compressed objects within 2 object streams
+ 180 PDF objects out of 1000 (max. 8388607)
+ 120 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
